@@ -7,7 +7,8 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/system';
 import HeaderProfile from './HeaderProfile';
-import LogoWide from '../assets/LogoWide.png'
+import LogoWide from '../../assets/LogoWide.png'
+import HeaderAuth from './HeaderAuth';
 
 const Header = () => {
   return (
@@ -43,7 +44,7 @@ const Header = () => {
         </NavTopItemWrap>
         {/* Profile */}
         <NavTopItemWrap>
-          <HeaderProfile></HeaderProfile>
+          { false? <HeaderProfile />:<HeaderAuth />}  
         </NavTopItemWrap>
       </Stack>
 
