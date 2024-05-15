@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 import { Container } from "@mui/material";
 function App() {
   return (
-      <Container maxWidth="md" sx={{backgroundColor: "gray", height: "1500px"}}>
+      <Container maxWidth="md" >
         <Header></Header>
         <Outlet></Outlet>
       </Container>

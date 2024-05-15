@@ -14,11 +14,12 @@ const Header = () => {
   return (
     <Stack component={"header"} spacing={0}
       sx={{
-        marginTop: "2rem",
+        position: 'sticky',
+        marginTop: '2rem',
         backgroundColor: "#ffffff",
         borderRadius: "0.75rem",
         overflow: "hidden",
-        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       }}>
 
       {/* Top */}
