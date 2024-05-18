@@ -13,7 +13,8 @@ import {
 import Terms from '../components/Signup/Terms'
 import AccountInfo from '../components/Signup/AccountInfo'
 import BasicInfo from '../components/Signup/BasicInfo'
-import { useForm, Controller, } from 'react-hook-form'
+import StyleInfo from '../components/Signup/StyleInfo'
+import { useForm } from 'react-hook-form'
 const steps = [
   '약관 동의',
   '계정 정보 입력',
@@ -24,13 +25,9 @@ const steps = [
 const Signup = () => {
 
   const { 
-    register, 
     handleSubmit,
-    control,
     getValues,
-    watch,
     setValue,
-    formState: {errors, isValid},
   } = useForm()
 
   const [activeStep, setActiveStep] = useState(0)
@@ -42,17 +39,21 @@ const Signup = () => {
   }
   const handlePrev = () => setActiveStep(activeStep - 1)
   
-
+  const onSubmit = (data) => {
+    console.log("Sign up : ", data)
+  }
 
   return (
-    <Box sx={{
-      margin: '4rem 0',
-      minHeight: 'calc(100vh - 20rem)',
-      padding: '2rem',
-      backgroundColor: 'white',
-      borderRadius: '0.75rem',
-      boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    }}>
+    <Box
+      component={'form'} onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        margin: '4rem 0',
+        minHeight: 'calc(100vh - 20rem)',
+        padding: '2rem',
+        backgroundColor: 'white',
+        borderRadius: '0.75rem',
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+      }}>
       <Stack direction={'column'} alignItems={'center'} justifyContent={'space-between'} spacing={2} height={'100%'}>
         {/* Top Steeper */}
         <Stepper activeStep={activeStep} alternativeLabel connector={null} sx={{ width: '70%',alignItems: 'center'}}>
@@ -81,6 +82,12 @@ const Signup = () => {
             parentSetValue={setValue}
           ></BasicInfo>
         }
+        {activeStep === 3 && 
+          <StyleInfo 
+            setNextVaild={setNextVaild}
+            parentSetValue={setValue}
+          ></StyleInfo>
+        }
 
         
         {/* Bottom Buttons */}
@@ -107,6 +114,8 @@ const Signup = () => {
             disableElevation
             sx={{width :'15rem'}}
             color='secondary'
+            disabled={!nextValid}
+            type='submit'
           >완료</Button>}
         </Stack>
 
