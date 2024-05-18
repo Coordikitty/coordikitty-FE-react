@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import terms from '../../utils/terms';
 import { 
   Box,
@@ -7,9 +7,14 @@ import {
   FormControlLabel,
   Typography
 } from '@mui/material';
-const Terms = () => {
+const Terms = ({setNextVaild}) => {
 
+  const [isAgree, setIsAgree] = useState(true)
   const theme = useTheme()
+
+  useEffect(() => {
+    setNextVaild(isAgree)
+  }, [isAgree, setNextVaild])
   
   return (
     <>
@@ -17,7 +22,8 @@ const Terms = () => {
         sx={{
           overflowY: 'scroll',
           border: `1px solid ${theme.palette.primary.main}`,
-          borderRadius: '0.75rem'
+          borderRadius: '0.75rem',
+          height: '30rem'
         }}
       >
         {terms}
@@ -25,7 +31,12 @@ const Terms = () => {
       <FormControlLabel
         label={<Typography variant='h4'>위 약관에 동의합니다.</Typography>}
         control={
-          <Checkbox size='large' color='secondary'></Checkbox>
+          <Checkbox 
+            size='large' 
+            color='secondary' 
+            onClick={() => {setIsAgree(!isAgree)}}
+            checked={isAgree}
+          ></Checkbox>
         }
       ></FormControlLabel>
     </>
