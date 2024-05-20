@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { 
   Stack,
   TextField,
@@ -6,11 +6,22 @@ import {
   Box
 } from '@mui/material'
 import { styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 import HeaderProfile from './HeaderProfile';
 import LogoWide from '../../assets/LogoWide.png'
 import HeaderAuth from './HeaderAuth';
 
+const HOME = 'home'
+const POST = 'post'
+const MY_PAGE = 'my_page'
+
 const Header = () => {
+
+  const [tap, setTap] = useState(HOME)
+  const navigate = useNavigate()
+
+  
+
   return (
     <Stack component={"header"} spacing={0}
       sx={{
@@ -51,13 +62,22 @@ const Header = () => {
 
       {/* Bottom */}
       <Stack component={"nav"} direction={"row"}>
-        <NavButton variant='contained' fullWidth is-active={'true'} >
+        <NavButton variant='contained' fullWidth 
+          is-active={tap === HOME ? 'true' : undefined} 
+          onClick={() => {setTap(HOME); navigate('/')}}
+        >
           Home
         </NavButton>
-        <NavButton variant='contained' fullWidth >
-          Community
+        <NavButton variant='contained' fullWidth 
+          is-active={tap === POST ? 'true' : undefined}
+          onClick={() => {setTap(POST); navigate('/posts')}}
+        >
+          Post
         </NavButton>
-        <NavButton variant='contained' fullWidth >
+        <NavButton variant='contained' fullWidth 
+          is-active={tap === MY_PAGE ? 'true' : undefined}
+          onClick={() => {setTap(MY_PAGE); navigate('/my-page')}}
+        >
           My Page
         </NavButton>
       </Stack>
