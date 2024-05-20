@@ -6,15 +6,21 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Typography,
   Button
 } from '@mui/material'
+import ClothesAppendModal from './ClothesAppendModal'
 import clothesInfo from '../../utils/clothesInfo'
 import tempImg from '../../assets/temp.jpg'
 
 const Closet = () => {
+
   const [type, setType] = useState('')
+  const [modalOpen, setModalOpen] = useState(false);
+  
   const handleType = e => setType(e.target.value)
+
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   return (
     <Box 
@@ -40,9 +46,11 @@ const Closet = () => {
           variant='contained' 
           disableElevation 
           sx={{width: "20%"}}
+          onClick={handleModalOpen}
         >
           옷 추가
         </Button>
+        <ClothesAppendModal modalOpen={modalOpen} handleModalClose={handleModalClose}></ClothesAppendModal>
       </Stack>
       <Stack direction={'row'} sx={{overflowX: 'scroll'}} marginTop={'2rem'} spacing={2} >
         <ClothesCard></ClothesCard>
