@@ -47,14 +47,13 @@ const Signup = () => {
     <Box
       component={'form'} onSubmit={handleSubmit(onSubmit)}
       sx={{
-        margin: '4rem 0',
-        minHeight: 'calc(100vh - 20rem)',
+        margin: '2rem 0',
         padding: '2rem',
         backgroundColor: 'white',
         borderRadius: '0.75rem',
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       }}>
-      <Stack direction={'column'} alignItems={'center'} justifyContent={'space-between'} spacing={2} height={'100%'}>
+      <Stack direction={'column'} alignItems={'center'} justifyContent={'space-between'}  spacing={2} >
         {/* Top Steeper */}
         <Stepper activeStep={activeStep} alternativeLabel connector={null} sx={{ width: '70%',alignItems: 'center'}}>
           {steps.map((step) => {
