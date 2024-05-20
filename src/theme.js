@@ -1,12 +1,11 @@
 import { createTheme } from "@mui/material";
 
-const defaultTheme = createTheme();
 
 const theme = createTheme({
   typography: {
     fontFamily: 'Arial',
     h1: {
-      fontSize: "3.6rem",
+      fontSize: "2.8rem",
       fontWeight: 700
     },
     h2: {

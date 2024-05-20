@@ -5,15 +5,14 @@ import SportyImg from "../assets/style_img/sporty.jpg"
 import StreetImg from "../assets/style_img/street.jpg"
 
 
-const styleLabel = ['casual', 'formal', 'minimal', 'sporty', 'street']
 
 
 const styleInfo = [
-  {style : "casual",  img : CasualImg},
-  {style : "formal",  img : FormalImg},
-  {style : "minimal", img : MinimalImg},
-  {style : "sporty",  img : SportyImg},
-  {style : "street",  img : StreetImg}
+  {style : "casual",  kr : '캐주얼', img : CasualImg},
+  {style : "formal",  kr : '포말',   img : FormalImg},
+  {style : "minimal", kr : '미니멀', img : MinimalImg},
+  {style : "sporty",  kr : '스포티', img : SportyImg},
+  {style : "street",  kr : '스트릿', img : StreetImg}
 ]
 
 export default styleInfo
