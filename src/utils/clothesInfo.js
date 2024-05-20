@@ -147,3 +147,5 @@ const clothesInfo = {
     }
   },
 }
+
+export default clothesInfo

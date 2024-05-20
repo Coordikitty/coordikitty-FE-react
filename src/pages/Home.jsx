@@ -12,6 +12,7 @@ import {
 import tempImg from "../assets/temp.jpg"
 
 import styleInfo from '../utils/styleInfo'
+import ClosetModal from '../components/Closet/ClosetModal'
 
 
 const OCCASION = 'occasion'
@@ -44,7 +45,15 @@ const Home = () => {
     }}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Typography variant='h1'>오늘의 추천</Typography>
-        <Button variant='contained' disableElevation sx={{width: "20%"}}>옷장 열기</Button>
+        <Button 
+          variant='contained' 
+          disableElevation 
+          sx={{width: "20%"}}
+          onClick={handleModalOpen}
+        >
+          옷장 열기
+        </Button>
+        <ClosetModal modalOpen={modalOpen} handleModalClose={handleModalClose}></ClosetModal>
       </Stack>
       <Stack direction={'row'} spacing={2} marginTop={'2rem'}>
         <FormControl fullWidth>
@@ -76,17 +85,17 @@ const Home = () => {
         </FormControl>
       </Stack>
       <Stack direction={'row'} sx={{overflowX: 'scroll'}} marginTop={'2rem'} spacing={2} >
-        <RecomandClothsCard></RecomandClothsCard>
-        <RecomandClothsCard></RecomandClothsCard>
-        <RecomandClothsCard></RecomandClothsCard>
-        <RecomandClothsCard></RecomandClothsCard>
-        <RecomandClothsCard></RecomandClothsCard>
+        <RecomandClothesCard></RecomandClothesCard>
+        <RecomandClothesCard></RecomandClothesCard>
+        <RecomandClothesCard></RecomandClothesCard>
+        <RecomandClothesCard></RecomandClothesCard>
+        <RecomandClothesCard></RecomandClothesCard>
       </Stack>
     </Box>
   )
 }
 
-const RecomandClothsCard = () => {
+const RecomandClothesCard = () => {
   return (
     <Box>
       <Typography variant='h3' marginBottom={'1rem'}>Hello</Typography>
