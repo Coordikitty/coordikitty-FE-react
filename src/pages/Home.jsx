@@ -35,14 +35,7 @@ const Home = () => {
   const handleLv2 = e => SetLv2(e.target.value) 
 
   return (
-    <Box
-    sx={{
-      margin: '2rem 0',
-      padding: '2rem',
-      backgroundColor: 'white',
-      borderRadius: '0.75rem',
-      boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    }}>
+    <Box marginTop={'2rem'}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Typography variant='h1'>오늘의 추천</Typography>
         <Button 
