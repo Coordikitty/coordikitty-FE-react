@@ -31,15 +31,12 @@ const ClothesAppendModal = ({modalOpen, handleModalClose}) => {
   const handleLv3 = e => setTypeLv3(e.target.value)
 
   const [imgFile, setImgFile] = useState(null)
+  const [preview, setPreview] = useState(null)
 
   const handleImgFile = (e) => {
     const file = e.target.files[0]
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-        setImgFile(reader.result);
-   	};
-
+    setImgFile(file)
+    setPreview(URL.createObjectURL(file));
   }
 
   return (
@@ -53,15 +50,11 @@ const ClothesAppendModal = ({modalOpen, handleModalClose}) => {
           <Stack spacing={2}>
             {/* 이미지 파일 */}
             <Box
-              sx={{
-                width: '100%',
-                aspectRatio: 1,
-                borderRadius: '0.75rem',
-                backgroundColor: '#cfcfcf',
-                backgroundImage: `url(${imgFile})`,
-                backgroundSize: 'cover'
-              }}
-            ></Box>
+              width={'100%'}borderRadius={'0.75rem'} backgroundColor={'#cfcfcf'}
+              sx={{ aspectRatio: 1}}
+            >
+              {preview && <img src={preview} alt={preview} style={{ width: '100%', height: '100%', objectFit: 'contain' }}></img>}
+            </Box>
             <TextField type='file' size='small' fullWidth onChange={handleImgFile}></TextField>
             {/* 대분류 */}
             <FormControl fullWidth size='small'>

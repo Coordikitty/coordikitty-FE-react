@@ -15,7 +15,7 @@ import styleInfo from '../utils/styleInfo'
 import ClosetModal from '../components/Closet/ClosetModal'
 
 
-const OCCASION = 'occasion'
+const SITUATION = 'situation'
 const STYLE = 'style'
 const SEASON = 'season'
 
@@ -57,7 +57,7 @@ const Home = () => {
             value={lv1}
             onChange={handleLv1}
           >
-            <MenuItem value={OCCASION}>상황</MenuItem>
+            <MenuItem value={SITUATION}>상황</MenuItem>
             <MenuItem value={STYLE}>스타일</MenuItem>
             <MenuItem value={SEASON}>계절</MenuItem>
           </Select>

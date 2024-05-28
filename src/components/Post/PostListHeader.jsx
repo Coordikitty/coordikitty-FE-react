@@ -6,10 +6,11 @@ import {
   Typography,
   Button
 } from '@mui/material'
+import { useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import PostList from './PostList';
 const PostListHeader = () => {
-
+  const navigate = useNavigate()
   const [tap, setTap] = useState(0)
   const handleTap = (e, targetTap) => {
     console.log(targetTap)
@@ -24,6 +25,7 @@ const PostListHeader = () => {
           variant='contained' 
           disableElevation 
           sx={{width: "20%"}}
+          onClick={() => {navigate('/post-write')}}
         >
           글 작성
         </Button>
