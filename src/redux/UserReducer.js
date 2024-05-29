@@ -14,6 +14,9 @@ export const UserSlice = createSlice({
           state.nickname = action.payload.nickname
           state.accessToken = action.payload.accessToken
         },
+        refreshAccessToken: (state, action) => {
+          state.accessToken = action.payload.accessToken
+        },
         logout : (state) => {
           state.nickname = null
           state.accessToken = null
@@ -21,5 +24,5 @@ export const UserSlice = createSlice({
 
     },
 });
-export const { login, logout } = UserSlice.actions;
+export const { login, refreshAccessToken, logout } = UserSlice.actions;
 export default UserSlice.reducer;
