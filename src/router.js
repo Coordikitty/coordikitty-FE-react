@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";
@@ -24,9 +24,13 @@ const router = createBrowserRouter([
         element: <Posts></Posts>
       },
       {// Post page
-        path: "post/:post-id",
-        errorElement: <div>wrong</div>,
+        path: "post/:postId",
         element: <Post></Post>
+      },
+      // postId가 없는 경우에 대한 리다이렉트 설정
+      {
+        path: "post/",
+        element: <Navigate to="/posts" replace />
       },
       {// Post Write page
         path: "post-write",

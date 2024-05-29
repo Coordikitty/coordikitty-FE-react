@@ -15,7 +15,7 @@ import styleInfo from '../utils/styleInfo'
 import ClosetModal from '../components/Closet/ClosetModal'
 
 
-const OCCASION = 'occasion'
+const SITUATION = 'situation'
 const STYLE = 'style'
 const SEASON = 'season'
 
@@ -35,14 +35,7 @@ const Home = () => {
   const handleLv2 = e => SetLv2(e.target.value) 
 
   return (
-    <Box
-    sx={{
-      margin: '2rem 0',
-      padding: '2rem',
-      backgroundColor: 'white',
-      borderRadius: '0.75rem',
-      boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    }}>
+    <Box marginTop={'2rem'}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Typography variant='h1'>오늘의 추천</Typography>
         <Button 
@@ -64,7 +57,7 @@ const Home = () => {
             value={lv1}
             onChange={handleLv1}
           >
-            <MenuItem value={OCCASION}>상황</MenuItem>
+            <MenuItem value={SITUATION}>상황</MenuItem>
             <MenuItem value={STYLE}>스타일</MenuItem>
             <MenuItem value={SEASON}>계절</MenuItem>
           </Select>
