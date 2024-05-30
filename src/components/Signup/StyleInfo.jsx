@@ -22,7 +22,6 @@ const StyleInfo = ({setNextVaild, parentSetValue}) => {
 
   const watchField = watch('preferredStyle')
   useEffect(() => {
-    console.log(watchField)
     if (watchField.length > 0) {
       parentSetValue('preferredStyle', watchField)
       setNextVaild(true)

@@ -40,8 +40,14 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
     if(isValid) {
       const data = getValues()
       Object.keys(data).map((key) =>  {
-        if(key === 'password_check') { return null}
-        else { parentSetValue(key, data[key]); return null}
+        if (key === 'birth') {
+          const [year, month, day] = data.birth.split('-')
+          parentSetValue('year', year);
+          parentSetValue('month', month);
+          parentSetValue('day', day);
+        } else if(key !== 'password_check') { 
+          parentSetValue(key, data[key]);
+        }
       })
     }
     setNextVaild(isValid)
@@ -62,6 +68,18 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
             },
           })} />
         {errors.email && <Typography color={'error'}>{errors.email.message}</Typography>}
+      </Box>
+
+      <Box>
+        <TextField
+          id="name" type='text' label="이름"
+          variant="standard" margin='dense' fullWidth
+          {...register("name", {
+            required: "이름을 입력해 주세요.",
+            pattern: {
+            },
+          })} />
+        {errors.nickname && <Typography color={'error'}>{errors.nickname.message}</Typography>}
       </Box>
 
       <Box>
@@ -132,6 +150,8 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
           })} />
         {errors.birthdate && <Typography color={'error'}>{errors.birthdate.message}</Typography>}
       </Box>
+
+
       <Box>
         <Controller
           control={control}
@@ -154,14 +174,16 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
         />
         {errors.phoneNumber && <Typography color={'error'}>{errors.phoneNumber.message}</Typography>}
       </Box>
-      <Box >
+
+
+      {/* <Box >
         <FormLabel>Gender</FormLabel>
         <RadioGroup defaultValue="other" name="gender" row  sx={{paddingLeft: '0.5rem'}}>
           <FormControlLabel value="male"   control={<Radio color='secondary' {...register("gender")}/>} label="Male" />
           <FormControlLabel value="female" control={<Radio color='secondary' {...register("gender")}/>} label="Female" />
           <FormControlLabel value="other"  control={<Radio color='secondary' {...register("gender")}/>} label="Other" />
         </RadioGroup>
-      </Box>
+      </Box> */}
 
     </Box>
   )
