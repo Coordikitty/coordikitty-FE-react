@@ -43,9 +43,7 @@ const Signup = () => {
   }
   const handlePrev = () => setActiveStep(activeStep - 1)
   
-  const onSubmit = async (data) => {
-    
-    console.log("Sign up data : ", data)
+  const onSubmit = async (data) => {    
     try {
       await signupApi(data)
       alert('회원가입 성공')

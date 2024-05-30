@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderProfile from './HeaderProfile';
 import LogoWide from '../../assets/LogoWide.png'
 import HeaderAuth from './HeaderAuth';
+import { useSelector } from 'react-redux';
 
 const HOME = 'home'
 const POST = 'post'
@@ -19,7 +20,7 @@ const Header = () => {
 
   const [tap, setTap] = useState(HOME)
   const navigate = useNavigate()
-
+  const nickname = useSelector(state => state.user.nickname)
   
 
   return (
@@ -56,7 +57,7 @@ const Header = () => {
         </NavTopItemWrap>
         {/* Profile */}
         <NavTopItemWrap>
-          { false? <HeaderProfile />:<HeaderAuth />}  
+          { nickname ? <HeaderProfile />:<HeaderAuth />}  
         </NavTopItemWrap>
       </Stack>
 

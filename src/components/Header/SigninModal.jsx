@@ -11,22 +11,35 @@ import {
 import { styled } from '@mui/system';
 import LogoWide from '../../assets/LogoWide.png'
 import { useForm } from 'react-hook-form'
-
+import { useCookies } from 'react-cookie';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/UserReducer';
+import signinApi from '../../apis/auth/signinApi';
 
 
 const SigninModal = ({modalOpen, handleModalClose}) => {
 
+  const dispatch = useDispatch()
+  const [, setCookie] = useCookies(['refreshToken'])
   const { 
     register, 
     handleSubmit,
     formState: {isSubmitting, errors},
   } = useForm()
 
-
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    try {
+      const res = await signinApi(data)
+      dispatch(login({
+        nickname : data.email,
+        accessToken : res.accessToken
+      }))
+      setCookie('refreshToken', res.refeshToken)
+    } catch (error) {
+      console.error(error)
+      alert('로그인 실패')
+    }
   }
-
 
   return (
     <Modal
