@@ -1,147 +1,154 @@
 const clothesInfo = {
-  botton : {
+  BOTTOMS : {
     kr : '하의',
     sub : {
-      longPants : {
+      BOTTOMS_LONG : {
         kr : '긴바지',
         sub : {
-          denim : '데님',
-          slacks : '슬랙스',
-          sweat : '스웨트',
-          // cargo : '카고',
-          // leggings : '레깅스',
-          sports : '스포츠'
+          BOTTOMS_LONG_DENIM : '데님',
+          BOTTOMS_LONG_SLACKS : '슬랙스',
+          BOTTOMS_LONG_SWEAT : '스웨트',
+          BOTTOMS_LONG_CARGO : '카고',
+          BOTTOMS_LONG_LEGGINGS : '레깅스',
+          BOTTOMS_LONG_COTTON : '코튼',
+          BOTTOMS_LONG_SPORTS : '스포츠'
         }
       },
-      shortPants : {
+      BOTTOMS_SHORT : {
         kr : '반바지',
         sub : {
-          denim : '데님',
-          sweat : '스웨트',
-          sports : '스포츠'
+          BOTTOMS_SHORT_DENIM : '데님',
+          BOTTOMS_SHORT_SWEAT : '스웨트',
+          BOTTOMS_SHORT_COTTON : '코튼',
+          BOTTOMS_SHORT_SPORTS : '스포츠'
         }
       } 
     }
   },
-  // skirt: {
-  //   kr: '스커트',
-  //   sub: {
-  //     longSkirt: {
-  //       kr: '롱 스커트',
-  //       sub: {
-  //         wrap: '랩',
-  //         flare: '플레어',
-  //         mermaid: '머메이드'
-  //       }
-  //     },
-  //     miniSkirt: {
-  //       kr: '미니 스커트',
-  //       sub: {
-  //         hLine: 'H라인',
-  //         aLine: 'A라인',
-  //         pleats: '플리츠',
-  //         flare: '플레어',
-  //         cancan: '캉캉'
-  //       }
-  //     },
-  //     midiSkirt: {
-  //       kr: '미디 스커트',
-  //       sub: {
-  //         hLine: 'H라인',
-  //         aLine: 'A라인',
-  //         wrap: '랩',
-  //         flare: '플레어'
-  //       }
-  //     }
-  //   }
-  // },
-  top: {
-    kr: '상의',
+
+  SKIRT: {
+    kr: '스커트',
     sub: {
-      longSleeve: {
-        kr: '긴팔',
+      SKIRT_LONG: {
+        kr: '롱 스커트',
         sub: {
-          knit: '니트',
-          hoodie: '후드',
-          sweatshirt: '맨투맨',
-          shirt: '셔츠',
-          tShirt: '티셔츠',
-          sports: '스포츠'
+          SKIRT_LONG_LAB: '랩',
+          SKIRT_LONG_FLARE: '플레어',
+          SKIRT_LONG_MERMAID: '머메이드'
         }
       },
-      shortSleeve: {
-        kr: '반팔',
+      SKIRT_MINI: {
+        kr: '미니 스커트',
         sub: {
-          polo: '폴로',
-          shirt: '셔츠',
-          sweat: '스웨트',
-          tShirt: '티셔츠',
-          sports: '스포츠'
+          MINI_H: 'H라인',
+          MINI_A: 'A라인',
+          MINI_PLEATS: '플리츠',
+          MINI_FLARE: '플레어',
+          MINI_K: '캉캉'
         }
       },
-      // sleeveless: {
-      //   kr: '민소매',
-      //   sub: {
-      //   }
-      // }
-    }
-  },
-  onePiece : {
-    kr: '원피스',
-    sub : {
-      onePiece: {
-        kr: '원피스',
-        sub : {
-          onePiece : '원피스'
+      SKIRT_MIDI: {
+        kr: '미디 스커트',
+        sub: {
+          MIDI_H: 'H라인',
+          MIDI_A: 'A라인',
+          MIDI_LAB: '랩',
+          MIDI_FLARE: '플레어'
         }
       }
     }
   },
-  outer : {
+
+  TOPS: {
+    kr: '상의',
+    sub: {
+      TOPS_LONG: {
+        kr: '긴팔',
+        sub: {
+          TOPS_LONG_NEAT: '니트',
+          TOPS_LONG_HOODED: '후드',
+          TOPS_LONG_SWEAT: '스웨트',
+          TOPS_LONG_SHIRTS: '셔츠',
+          TOPS_LONG_T_SHIRTS: '티셔츠',
+          TOPS_LONG_SPORTS: '스포츠'
+        }
+      },
+      TOPS_SHORT: {
+        kr: '반팔',
+        sub: {
+          TOPS_SHORT_POLO: '폴로',
+          TOPS_SHORT_SHIRTS: '셔츠',
+          TOPS_SHORT_SWEAT: '스웨트',
+          TOPS_SHORT_T_SHIRTS: '티셔츠',
+          TOPS_SHORT_SPORTS: '스포츠'
+        }
+      },
+      TOPS_LESS: {
+        kr: '민소매',
+        sub: {
+          TOPS_LESS_LESS : '민소매'
+        }
+      }
+    }
+  },
+  
+  ONEPIECE : {
+    kr: '원피스',
+    sub : {
+      ONEPIECE_ONEPIECE: {
+        kr: '원피스',
+        sub : {
+          ONEPIECE_ONEPIECE_ONEPIECE : '원피스'
+        }
+      }
+    }
+  },
+
+  OUTER : {
     kr : '아우터',
     sub : {
-      hoodZipup : {
+      HOODED_ZIP_UP : {
         kr : '후드집업',
         sub : {
-          hoodZipup : '후드집업'
+          HOODED_ZIP_UP : '후드집업'
         }
       },
-      blouson : {
+      BLOUSON : {
         kr : '블루종',
         sub : {
-          blouson : '블루종'
+          BLOUSON : '블루종'
         }
       },
-      blazer : {
-        kr : '블레이저',
-        sub : {
-          blazer : '블레이저'
-        }
-      },
-      cardigan : {
+      CARDIGAN : {
         kr : '카디건',
         sub : {
-          cardigan : '카디건'
+          CARDIGAN : '카디건'
         }
       },
-      coat : {
+      BLAZER : {
+        kr : '블레이저',
+        sub : {
+          BLAZER : '블레이저'
+        }
+      },
+      COAT : {
         kr : '코트',
         sub : {
-          single : '싱글',
-          trench : '트렌치'
+          SINGLE : '싱글',
+          TRANCH : '트렌치'
         }
       },
-      windbreaker : {
+      WIND_BREAKER : {
         kr : '바람막이',
         sub : {
-          windbreaker : '바람막이'
+          WIND_BREAKER : '바람막이'
         }
       },
-      padding : {
+      PADDING : {
         kr : '패딩',
         sub : {
-          short : '숏',
-          long : '롱'
+          SHORT : '숏',
+          LONG : '롱'
         }
       }
     }
