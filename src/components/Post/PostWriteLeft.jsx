@@ -5,7 +5,7 @@ import {
   Stack,
 } from '@mui/material'
 
-const PostWriteLeft = ({setImgFile}) => {
+const PostWriteLeft = ({postImgs, setPostImgs}) => {
 
 
   const [preview, setPreview] = useState(null)
@@ -15,7 +15,7 @@ const PostWriteLeft = ({setImgFile}) => {
   }
   const handleImgFile = (e) => {
     const file = e.target.files[0]
-    setImgFile(file)
+    setPostImgs([...postImgs, file])
     setPreview(URL.createObjectURL(file));
   }
 

@@ -12,19 +12,20 @@ import {
 } from '@mui/material'
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import styleInfo from '../../utils/styleInfo';
-import seasonInfo from '../../utils/seasonInfo';
 
-const PostWriteRight = ({style, setStyle, season, setSeason, situation, setSituation, handleModalOpen}) => {
+const PostWriteRight = ({content, setContent, style, setStyle,  handleModalOpen, isValid, handleSubmit}) => {
 
+  const handleContent = e => setContent(e.target.value)
   const handleStyle = e => setStyle(e.target.value)
-  const handleSeason = e => setSeason(e.target.value)
-  const handleSituation = e => setSituation(e.target.value)
+  // const handleSeason = e => setSeason(e.target.value)
+  // const handleSituation = e => setSituation(e.target.value)
 
   return (
     <Stack width={"100%"} padding={'1rem 0.5rem'} justifyContent={'space-between'} spacing={2}>
       <TextField
         label={'내용'} rows={5}
         fullWidth multiline
+        value={content} onChange={handleContent}
       ></TextField>
 
       {/* 스타일 분류 */}
@@ -43,7 +44,7 @@ const PostWriteRight = ({style, setStyle, season, setSeason, situation, setSitua
       </FormControl>
 
       {/* 계절 */}
-      <FormControl fullWidth>
+      {/* <FormControl fullWidth>
         <InputLabel id="post-write-season-select-label">계절</InputLabel>
         <Select
           id="post-write-season-select" labelId="post-write-season-select-label"
@@ -55,10 +56,10 @@ const PostWriteRight = ({style, setStyle, season, setSeason, situation, setSitua
             return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
           })}
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       {/* 상황 */}
-      <FormControl fullWidth>
+      {/* <FormControl fullWidth>
         <InputLabel id="post-write-situation-select-label">상황</InputLabel>
         <Select
           id="post-write-situation-select" labelId="post-write-situation-select-label"
@@ -68,7 +69,7 @@ const PostWriteRight = ({style, setStyle, season, setSeason, situation, setSitua
         >
 
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       <Box flexGrow={1}
         borderRadius={'0.75rem'}
@@ -81,8 +82,9 @@ const PostWriteRight = ({style, setStyle, season, setSeason, situation, setSitua
       </Box>
 
       <Button
-        variant='contained' fullWidth disableElevation
-        onClick={() => { console.log('first') }}
+        variant='contained' fullWidth disableElevation color='secondary'
+        onClick={handleSubmit}
+        disabled={!isValid} 
       >작성 완료</Button>
     </Stack>
   )
