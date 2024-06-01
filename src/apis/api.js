@@ -46,11 +46,18 @@ api.interceptors.response.use(
           store.dispatch(refreshAccessToken(newAccessToken));
           cookies.set('refreshToken', newRefreshToken)
           api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`
-          return api(originRequest);
+          console.log("eooeoeeo")
+          return await api(originRequest);
         } catch (error) {
           throw error
         }
       }
+      else {
+        throw error
+      }
+    }
+    else {
+      throw error
     }
   }
 )

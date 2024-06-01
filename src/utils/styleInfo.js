@@ -10,8 +10,8 @@ import StreetImg from "../assets/style_img/street.jpg"
 const styleInfo = [
   {style : "CASUAL",  kr : '캐주얼', img : CasualImg},
   {style : "FORMAL",  kr : '포말',   img : FormalImg},
-  {style : "MINIMAL", kr : '미니멀', img : MinimalImg},
-  {style : "SPORTY",  kr : '스포티', img : SportyImg},
+  {style : "MINIMALISTIC", kr : '미니멀', img : MinimalImg},
+  {style : "SPORTS",  kr : '스포츠', img : SportyImg},
   {style : "STREET",  kr : '스트릿', img : StreetImg}
 ]
 
