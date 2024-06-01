@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   Tab,
   Box,
@@ -9,13 +9,23 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import PostList from './PostList';
+import getPostListApi from '../../apis/post/getPostListApi';
 const PostListHeader = () => {
   const navigate = useNavigate()
+
   const [tap, setTap] = useState(0)
   const handleTap = (e, targetTap) => {
     console.log(targetTap)
     setTap(targetTap)
   }
+
+  useEffect(() => {
+    const fetch = async() => {
+      const res = await getPostListApi()
+      console.log('getPostListApi res : ', res)
+    }
+    fetch()
+  })
 
   return (
     <Box>
