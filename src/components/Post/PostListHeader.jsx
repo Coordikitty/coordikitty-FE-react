@@ -34,7 +34,7 @@ const PostListHeader = () => {
       }
     }
     fetch()
-  }, [])
+  }, [accessToken])
 
   return (
     <Box>

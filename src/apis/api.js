@@ -41,8 +41,8 @@ api.interceptors.response.use(
           const res = await axios.post(process.env.REACT_APP_SERVER_URL + '/auth/token', {
             refreshToken: refreshToken 
           })
-          const newAccessToken = res.data.accessToken
-          const newRefreshToken = res.data.refreshToken
+          const newAccessToken = res.data.tokenDto.accessToken
+          const newRefreshToken = res.data.tokenDto.refreshToken
           store.dispatch(refreshAccessToken(newAccessToken));
           cookies.set('refreshToken', newRefreshToken)
           api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`

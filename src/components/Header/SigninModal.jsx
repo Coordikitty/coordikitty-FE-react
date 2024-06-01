@@ -20,7 +20,7 @@ import signinApi from '../../apis/auth/signinApi';
 const SigninModal = ({modalOpen, handleModalClose}) => {
 
   const dispatch = useDispatch()
-  const [, setCookie] = useCookies(['refreshToken'])
+  const [, setCookie] = useCookies()
   const { 
     register, 
     handleSubmit,
@@ -32,10 +32,12 @@ const SigninModal = ({modalOpen, handleModalClose}) => {
       const res = await signinApi(data)
       console.log("signinApi res : ", res)
       dispatch(login({
+        email : res.email,
         nickname : res.nickname,
         accessToken : res.tokenDto.accessToken
       }))
-      setCookie('refreshToken', res.tokenDto.refeshToken)
+      setCookie('refreshToken', res.tokenDto.refreshToken)
+      
       handleModalClose()
     } catch (error) {
       console.error(error)

@@ -5,12 +5,14 @@ export const UserSlice = createSlice({
     name: "user",
     // init state
     initialState: {
+      email: null,
       nickname : null,
       accessToken : null
     },
     // reducer
     reducers: {
         login: (state, action) => {
+          state.email = action.payload.email
           state.nickname = action.payload.nickname
           state.accessToken = action.payload.accessToken
         },
@@ -18,6 +20,7 @@ export const UserSlice = createSlice({
           state.accessToken = action.payload.accessToken
         },
         logout : (state) => {
+          state.email = null
           state.nickname = null
           state.accessToken = null
         }
