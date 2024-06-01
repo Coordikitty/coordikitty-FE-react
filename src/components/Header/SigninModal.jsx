@@ -32,10 +32,10 @@ const SigninModal = ({modalOpen, handleModalClose}) => {
       const res = await signinApi(data)
       console.log("signinApi res : ", res)
       dispatch(login({
-        nickname : data.email,
-        accessToken : res.accessToken
+        nickname : res.nickname,
+        accessToken : res.tokenDto.accessToken
       }))
-      setCookie('refreshToken', res.refeshToken)
+      setCookie('refreshToken', res.tokenDto.refeshToken)
       handleModalClose()
     } catch (error) {
       console.error(error)
