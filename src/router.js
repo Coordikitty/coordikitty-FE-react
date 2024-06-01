@@ -6,6 +6,8 @@ import Post from "./pages/Post";
 import PostWrite from "./pages/PostWrite";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
+import Guard from "./pages/Guard";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
       },
       {// Post Write page
         path: "post-write",
-        element: <PostWrite></PostWrite>
+        element: <Guard><PostWrite></PostWrite></Guard>
       },
       // ------------------------------- 
 
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "my-page",
-        element: <Mypage></Mypage>
+        element: <Guard><Mypage></Mypage></Guard>
       }
       // ------------------------------- 
     
