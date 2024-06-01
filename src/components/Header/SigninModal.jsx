@@ -30,11 +30,13 @@ const SigninModal = ({modalOpen, handleModalClose}) => {
   const onSubmit = async (data) => {
     try {
       const res = await signinApi(data)
+      console.log("signinApi res : ", res)
       dispatch(login({
         nickname : data.email,
         accessToken : res.accessToken
       }))
       setCookie('refreshToken', res.refeshToken)
+      handleModalClose()
     } catch (error) {
       console.error(error)
       alert('로그인 실패')

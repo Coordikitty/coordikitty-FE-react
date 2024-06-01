@@ -2,10 +2,8 @@ import api from "../api";
 
 const signinApi = (data) => {
   console.log('signinApi Call : ', data)
-  return {
-    accessToken : 'test acc',
-    refeshToken : 'test ref'
-  }
+  const res = api.post('/auth/login', data)
+  return res
 }
 
 export default signinApi

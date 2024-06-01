@@ -31,7 +31,6 @@ const Signup = () => {
 
   const { 
     handleSubmit,
-    getValues,
     setValue,
   } = useForm()
 
@@ -45,9 +44,10 @@ const Signup = () => {
   
   const onSubmit = async (data) => {    
     try {
-      await signupApi(data)
+      const res = await signupApi(data)
+      console.log('signupApi res : ', res)
       alert('회원가입 성공')
-      // navigate('/')
+      navigate('/')
     } catch (error) {
       alert('회원가입 실패')
       console.error(error)

@@ -2,10 +2,6 @@ import {
   Box,
   TextField,
   Typography,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel
 } from '@mui/material'
 import { useEffect } from 'react'
 import { useForm, Controller, } from 'react-hook-form'
@@ -48,6 +44,7 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
         } else if(key !== 'password_check') { 
           parentSetValue(key, data[key]);
         }
+        return null
       })
     }
     setNextVaild(isValid)

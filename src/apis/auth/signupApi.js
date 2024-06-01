@@ -1,7 +1,9 @@
 import api from '../api'
 
 const signupApi = (data) => {
-  return api.post('/auth/signup', data)
+  console.log('signupApi Call : ', data)
+  const res = api.post('/auth/signUp', data)
+  return res
 }
 
 export default signupApi

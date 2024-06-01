@@ -92,17 +92,17 @@ const clothesInfo = {
     }
   },
   
-  ONEPIECE : {
-    kr: '원피스',
-    sub : {
-      ONEPIECE_ONEPIECE: {
-        kr: '원피스',
-        sub : {
-          ONEPIECE_ONEPIECE_ONEPIECE : '원피스'
-        }
-      }
-    }
-  },
+  // ONEPIECE : {
+  //   kr: '원피스',
+  //   sub : {
+  //     ONEPIECE_ONEPIECE: {
+  //       kr: '원피스',
+  //       sub : {
+  //         ONEPIECE_ONEPIECE_ONEPIECE : '원피스'
+  //       }
+  //     }
+  //   }
+  // },
 
   OUTER : {
     kr : '아우터',

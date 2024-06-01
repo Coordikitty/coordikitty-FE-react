@@ -22,7 +22,6 @@ const Header = () => {
   const navigate = useNavigate()
   const nickname = useSelector(state => state.user.nickname)
   
-
   return (
     <Stack component={"header"} spacing={0}
       sx={{
