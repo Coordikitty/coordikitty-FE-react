@@ -21,12 +21,13 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
 
 
   return (
-    <Stack width={"100%"} padding={"1rem 0.5rem"} justifyContent={'space-between'} spacing={1}>
+    <Stack width={'100%'} padding={"1rem 0.5rem"} justifyContent={'space-between'} spacing={1}>
     {/* Preview */}
     <Box
       flexGrow={1}
       borderRadius={'0.75rem'} backgroundColor={'#cfcfcf'}
       overflow={'hidden'}
+      minHeight={'10rem'}
     >
       {preview && <img src={preview} alt={preview} style={{ width: '100%', height: '100%', objectFit: 'contain' }}></img>}
     </Box>
