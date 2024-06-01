@@ -1,9 +1,16 @@
 import api from "../api";
 
-const getPostListApi = () => {
-  console.log('getPostListApi Call : ')
-  const res = api.get('/post')
+const unLoggedGetPostListApi = () => {
+  console.log('unLoggedGetPostListApi Call : ')
+  const res = api.get('/post/unLogged')
   return res
 }
 
-export default getPostListApi
+const loggedGetPostListApi = () => {
+  console.log('loggedGetPostListApi Call : ')
+  const res = api.get('/post/logged')
+  return res
+}
+
+
+export {unLoggedGetPostListApi, loggedGetPostListApi}
