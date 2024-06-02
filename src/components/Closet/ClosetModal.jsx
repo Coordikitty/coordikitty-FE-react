@@ -1,19 +1,33 @@
 import React from 'react'
-import { 
-  Modal, 
+import {
+  Modal,
   Container,
+  Button,
+  Box
 } from '@mui/material'
 import Closet from './Closet'
-const ClosetModal = ({modalOpen, handleModalClose}) => {
+const ClosetModal = ({ selectTool, modalOpen, handleModalClose }) => {
+
   return (
     <Modal
       open={modalOpen}
       onClose={handleModalClose}
-      sx={{display: 'flex', alignItems: "center"}}
+      sx={{ display: 'flex', alignItems: "center" }}
     >
       <Container maxWidth='md'>
-        <Closet></Closet>
-
+        <Box
+          width={'100%'}
+          padding={"4rem 2rem"}
+          sx={{ backgroundColor: 'white', borderRadius: '0.75rem' }}
+        >
+          <Closet selectTool={selectTool}></Closet>
+          {selectTool && 
+          <Button 
+            variant='contained' fullWidth disableElevation color='secondary'
+            disabled={selectTool.clothIds.length === 0}
+            onClick={handleModalClose}
+          >선택 완료</Button>}
+        </Box>
       </Container>
     </Modal>
   )
