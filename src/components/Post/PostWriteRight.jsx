@@ -80,13 +80,13 @@ const PostWriteRight = ({content, setContent, style, setStyle,  handleModalOpen,
         <Typography paddingLeft={'1rem'} variant='body1'>옷 정보</Typography>
         <Stack direction={'row'} width={'100%'} flexWrap={'wrap'} justifyContent={'center'}>
           {clothImgs.map((clothImg) => {
-            return <Box key={clothImg} padding={'0.5rem'} width={'12rem'} height={'15rem'} >
+            return <Box key={clothImg} padding={'0.5rem'} width={'8rem'} height={'10rem'} >
               <img src={clothImg} alt={clothImg} style={{width: '100%', height: '100%', borderRadius: '0.75rem', objectFit:'cover'}}></img>              
             </Box>
           })}
           <Stack 
             justifyContent={'center'} alignItems={'center'} 
-            textAlign={'center'} width={'11rem'} height={'14rem'} 
+            textAlign={'center'} width={'7rem'} height={'9rem'} 
             margin={'0.5rem'} boxSizing={'border-box'} borderRadius={'0.75rem'}
             onClick={handleModalOpen} boxShadow={'rgba(0, 0, 0, 0.35) 0px 2px 5px'}
           >
