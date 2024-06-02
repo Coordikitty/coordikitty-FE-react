@@ -13,6 +13,7 @@ import {
   Typography
 } from '@mui/material'
 import CheckroomIcon from '@mui/icons-material/Checkroom';
+import uploadClothesApi from '../../apis/closet/uploadClothesApi';
 import clothesInfo from '../../utils/clothesInfo'
 import styleInfo from '../../utils/styleInfo'
 import seasonInfo from '../../utils/seasonInfo'
@@ -20,13 +21,13 @@ import fitInfo from '../../utils/fitInfo'
 import thicknessInfo from '../../utils/thicknessInfo'
 import genderInfo from '../../utils/genderInfo'
 
-const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
 
+const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
   const [typeLv1, setTypeLv1] = useState('')
   const [typeLv2, setTypeLv2] = useState('')
   const [typeLv3, setTypeLv3] = useState('')
   const [style, setStyle] = useState('')
-  const [season, setSeason] = useState('')
+  // const [season, setSeason] = useState('')
   const [fit, setFit] = useState('')
   const [thickness, setThickness] = useState('')
   const [gender, setGender] = useState('')
@@ -52,6 +53,32 @@ const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
     const file = e.target.files[0]
     setImgFile(file)
     setPreview(URL.createObjectURL(file));
+  }
+
+  const handleUpload = async() => {
+    try {
+      const formData = new FormData()
+      const data = {
+        large: typeLv1,
+        medium: typeLv2,
+        small: typeLv3,
+        fit,
+        gender,
+        style,
+        thickness
+      }
+      console.log(data)
+      formData.append('closetPostRequestDto', new Blob([JSON.stringify(data)], {type: 'application/json'}))
+      formData.append('clothImg', imgFile)
+      console.log(formData)
+      const res = await uploadClothesApi(formData)
+      console.log('uploadClothesApi res : ', res)
+      alert('옷 정보 등록 성공')
+      handleModalClose()
+    } catch (error) {
+      console.error(error)
+      alert('옷 정보 업로드 실패')
+    }
   }
 
   return (
@@ -129,14 +156,14 @@ const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
               </ColthesPropertySelector>
 
               {/* 계절 유형 */}
-              <ColthesPropertySelector
+              {/* <ColthesPropertySelector
                 label={'season'} labelKr={'계절'} disabled={false}
                 value={season} handleValue={(e) => { setSeason(e.target.value) }}
               >
                 {seasonInfo.map((el) => {
                   return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
                 })}
-              </ColthesPropertySelector>
+              </ColthesPropertySelector> */}
 
               {/* 핏 유형 */}
               <ColthesPropertySelector
@@ -175,9 +202,11 @@ const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
             <Button variant='contained' fullWidth disableElevation onClick={handleModalClose}>
               취소
             </Button>
-            <Button variant='contained' fullWidth disableElevation color='secondary'>
-              추가
-            </Button>
+            <Button 
+              variant='contained' fullWidth disableElevation color='secondary' 
+              disabled={!(typeLv1 && typeLv2 && typeLv3 && fit && style && gender && thickness)}
+              onClick={handleUpload}
+            >추가</Button>
           </Stack>
         </Stack>
       </Container>

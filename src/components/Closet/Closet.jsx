@@ -36,7 +36,7 @@ const Closet = ({selectTool}) => {
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
-
+  
 
   return (
     <React.Fragment>
