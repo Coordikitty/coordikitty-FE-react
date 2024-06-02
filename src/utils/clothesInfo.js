@@ -26,18 +26,18 @@ const clothesInfo = {
     }
   },
 
-  SKIRT: {
+  SKIRTS: {
     kr: '스커트',
     sub: {
-      SKIRT_LONG: {
+      SKIRTS_LONG: {
         kr: '롱 스커트',
         sub: {
-          SKIRT_LONG_LAB: '랩',
-          SKIRT_LONG_FLARE: '플레어',
-          SKIRT_LONG_MERMAID: '머메이드'
+          SKIRTS_LONG_LAB: '랩',
+          SKIRTS_LONG_FLARE: '플레어',
+          SKIRTS_LONG_MERMAID: '머메이드'
         }
       },
-      SKIRT_MINI: {
+      MINI: {
         kr: '미니 스커트',
         sub: {
           MINI_H: 'H라인',
@@ -47,7 +47,7 @@ const clothesInfo = {
           MINI_K: '캉캉'
         }
       },
-      SKIRT_MIDI: {
+      MIDI: {
         kr: '미디 스커트',
         sub: {
           MIDI_H: 'H라인',
@@ -135,7 +135,7 @@ const clothesInfo = {
         kr : '코트',
         sub : {
           SINGLE : '싱글',
-          TRANCH : '트렌치'
+          TRENCH : '트렌치'
         }
       },
       WIND_BREAKER : {
