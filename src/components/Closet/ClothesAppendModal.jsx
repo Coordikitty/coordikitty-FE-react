@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { 
+import React, { useState, useRef } from 'react'
+import {
   Modal,
   Container,
   Box,
@@ -9,15 +9,30 @@ import {
   InputLabel,
   MenuItem,
   Stack,
-  Button
+  Button,
+  Typography
 } from '@mui/material'
+import CheckroomIcon from '@mui/icons-material/Checkroom';
 import clothesInfo from '../../utils/clothesInfo'
+import styleInfo from '../../utils/styleInfo'
+import seasonInfo from '../../utils/seasonInfo'
+import fitInfo from '../../utils/fitInfo'
+import thicknessInfo from '../../utils/thicknessInfo'
+import genderInfo from '../../utils/genderInfo'
 
-const ClothesAppendModal = ({modalOpen, handleModalClose}) => {
+const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
 
   const [typeLv1, setTypeLv1] = useState('')
   const [typeLv2, setTypeLv2] = useState('')
   const [typeLv3, setTypeLv3] = useState('')
+  const [style, setStyle] = useState('')
+  const [season, setSeason] = useState('')
+  const [fit, setFit] = useState('')
+  const [thickness, setThickness] = useState('')
+  const [gender, setGender] = useState('')
+  const [imgFile, setImgFile] = useState(null)
+  const [preview, setPreview] = useState(null)
+  const fileInputRef = useRef()
 
   const handleLv1 = e => {
     setTypeLv3('')
@@ -30,9 +45,9 @@ const ClothesAppendModal = ({modalOpen, handleModalClose}) => {
   }
   const handleLv3 = e => setTypeLv3(e.target.value)
 
-  const [imgFile, setImgFile] = useState(null)
-  const [preview, setPreview] = useState(null)
-
+  const handleImgUploadBtn = () => {
+    fileInputRef.current.click()
+  }
   const handleImgFile = (e) => {
     const file = e.target.files[0]
     setImgFile(file)
@@ -43,79 +58,147 @@ const ClothesAppendModal = ({modalOpen, handleModalClose}) => {
     <Modal
       open={modalOpen}
       onClose={handleModalClose}
-      sx={{display: 'flex', alignItems: "center"}}
+      sx={{ display: 'flex', alignItems: "center" }}
     >
-      <Container component={'form'} sx={{width: '35rem'}}>
-        <Box sx={{backgroundColor: "white"}} margin={'auto'} padding={"2rem"}>
-          <Stack spacing={2}>
-            {/* 이미지 파일 */}
-            <Box
-              width={'100%'}borderRadius={'0.75rem'} backgroundColor={'#cfcfcf'}
-              sx={{ aspectRatio: 1}}
-            >
-              {preview && <img src={preview} alt={preview} style={{ width: '100%', height: '100%', objectFit: 'contain' }}></img>}
-            </Box>
-            <TextField type='file' size='small' fullWidth onChange={handleImgFile}></TextField>
-            {/* 대분류 */}
-            <FormControl fullWidth size='small'>
-              <InputLabel id="clothes-type-lv1-select-label">옷 유형</InputLabel>
-              <Select
-                id="clothes-type-lv1-select" labelId="clothes-type-lv1-select--label"
-                label="추천 유형"
-                value={typeLv1}
-                onChange={handleLv1}
+      <Container component={'form'} sx={{ width: '70rem' }}>
+        <Stack backgroundColor={'white'} spacing={2} margin={'auto'} padding={"2rem"}>
+          <Stack spacing={2} direction={'row'}>
+
+            {/* Right : 이미지 파일 */}
+            <Stack spacing={2} width={'100%'} >
+              <Box flexGrow={1} onClick={handleImgUploadBtn} 
+                width={'100%'} sx={{ aspectRatio: '1' }} borderRadius={'0.75rem'} backgroundColor={'#cfcfcf'}>
+                {preview ? 
+                  <img 
+                    src={preview} alt={preview} 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  ></img> 
+                  :
+                  <Stack width={'100%'} height={'100%'} justifyContent={'center'} alignItems={'center'}>
+                    <CheckroomIcon sx={{width: '7rem', height: '7rem'}}></CheckroomIcon>
+                    <Typography variant='h3'>옷 선택하기</Typography>
+                  </Stack>}
+              </Box>
+              <input
+                ref={fileInputRef} type='file' accept='image/*'
+                onChange={handleImgFile} style={{display: 'none'}}
+              ></input>
+            </Stack>
+
+            {/* Left 옷 정보 */}
+            <Stack width={'100%'} spacing={2}>
+
+              {/* 대분류 */}
+              <ColthesPropertySelector
+                label={'type-lv1'} labelKr={'옷 유형'} disabled={false}
+                value={typeLv1} handleValue={handleLv1}
               >
                 {Object.keys(clothesInfo).map((el) => {
                   return <MenuItem key={el} value={el}>{clothesInfo[el]['kr']}</MenuItem>
                 })}
-              </Select>
-            </FormControl>
+              </ColthesPropertySelector>
 
-            <FormControl fullWidth size='small'>
-              <InputLabel id="clothes-type-lv2-select-label">하위 유형</InputLabel>
-              <Select
-                id="clothes-type-lv2-select" labelId="clothes-type-lv2-select--label"
-                label="추천 유형"
-                value={typeLv2}
-                onChange={handleLv2}
-                disabled={!typeLv1}
+              {/* 중분류 */}
+              <ColthesPropertySelector
+                label={'type-lv2'} labelKr={'하위 유형'} disabled={!typeLv1}
+                value={typeLv2} handleValue={handleLv2}
               >
                 {typeLv1 && Object.keys(clothesInfo[typeLv1]['sub']).map((el) => {
                   return <MenuItem key={el} value={el}>{clothesInfo[typeLv1]['sub'][el]['kr']}</MenuItem>
                 })}
-              </Select>
-            </FormControl>
+              </ColthesPropertySelector>
 
-            <FormControl fullWidth size='small'>
-              <InputLabel id="clothes-type-lv3-select-label">세부 유형</InputLabel>
-              <Select
-                id="clothes-type-lv3-select" labelId="clothes-type-lv3-select--label"
-                label="추천 유형"
-                value={typeLv3}
-                onChange={handleLv3}
-                disabled={!typeLv2}
+              {/* 소분류 */}
+              <ColthesPropertySelector
+                label={'type-lv3'} labelKr={'세부 유형'} disabled={!typeLv2}
+                value={typeLv3} handleValue={handleLv3}
               >
                 {typeLv2 && Object.keys(clothesInfo[typeLv1]['sub'][typeLv2]['sub']).map((el) => {
                   return <MenuItem key={el} value={el}>{clothesInfo[typeLv1]['sub'][typeLv2]['sub'][el]}</MenuItem>
                 })}
-              </Select>
-            </FormControl>
-            
-            <Stack direction={'row'} spacing={2}>
-              <Button variant='contained' fullWidth size='small' disableElevation
+              </ColthesPropertySelector>
+
+              {/* 스타일 유형 */}
+              <ColthesPropertySelector
+                label={'style'} labelKr={'스타일'} disabled={false}
+                value={style} handleValue={(e) => { setStyle(e.target.value) }}
               >
-                추가
-              </Button>
-              <Button variant='contained' fullWidth size='small' disableElevation
+                {styleInfo.map((el) => {
+                  return <MenuItem key={el.style} value={el.style}>{el.kr}</MenuItem>
+                })}
+              </ColthesPropertySelector>
+
+              {/* 계절 유형 */}
+              <ColthesPropertySelector
+                label={'season'} labelKr={'계절'} disabled={false}
+                value={season} handleValue={(e) => { setSeason(e.target.value) }}
               >
-                취소
-              </Button>
+                {seasonInfo.map((el) => {
+                  return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
+                })}
+              </ColthesPropertySelector>
+
+              {/* 핏 유형 */}
+              <ColthesPropertySelector
+                label={'fit'} labelKr={'핏'} disabled={false}
+                value={fit} handleValue={(e) => { setFit(e.target.value) }}
+              >
+                {fitInfo.map((el) => {
+                  return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
+                })}
+              </ColthesPropertySelector>
+
+              {/* 두께 */}
+              <ColthesPropertySelector
+                label={'thickness'} labelKr={'두께'} disabled={false}
+                value={thickness} handleValue={(e) => { setThickness(e.target.value) }}
+              >
+                {thicknessInfo.map((el) => {
+                  return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
+                })}
+              </ColthesPropertySelector>
+
+              {/* 성별 */}
+              <ColthesPropertySelector
+                label={'gender'} labelKr={'성별'} disabled={false}
+                value={gender} handleValue={(e) => { setGender(e.target.value) }}
+              >
+                {genderInfo.map((el) => {
+                  return <MenuItem key={el.val} value={el.val}>{el.kr}</MenuItem>
+                })}
+              </ColthesPropertySelector>
+
             </Stack>
 
           </Stack>
-        </Box>
+          <Stack direction={'row'} spacing={2}>
+            <Button variant='contained' fullWidth disableElevation onClick={handleModalClose}>
+              취소
+            </Button>
+            <Button variant='contained' fullWidth disableElevation color='secondary'>
+              추가
+            </Button>
+          </Stack>
+        </Stack>
       </Container>
     </Modal>
+  )
+}
+
+const ColthesPropertySelector = ({ label, labelKr, disabled, value, handleValue, children }) => {
+  return (
+    <FormControl fullWidth size='small'>
+      <InputLabel id={`clothes-${label}-select-label`}>{labelKr}</InputLabel>
+      <Select
+        id={`clothes-${label}-select`} labelId={`clothes-${label}-select-label`}
+        label={labelKr}
+        value={value}
+        onChange={handleValue}
+        disabled={disabled}
+      >
+        {children}
+      </Select>
+    </FormControl>
   )
 }
 
