@@ -26,11 +26,11 @@ const PostListHeader = () => {
       if(accessToken) {
         const res = await loggedGetPostListApi()
         console.log('loggedGetPostListApi res : ', res)
-        // setPostList(res)
+        setPostList(res)
       } else {
         const res = await unLoggedGetPostListApi()
         console.log('unLoggedGetPostListApi res : ', res)
-        // setPostList(res)
+        setPostList(res)
       }
     }
     fetch()

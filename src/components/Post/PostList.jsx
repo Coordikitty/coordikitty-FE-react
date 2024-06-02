@@ -14,26 +14,18 @@ import img5 from '../../assets/post_temp/5.jpg'
 import img6 from '../../assets/post_temp/6.jpg'
 import img7 from '../../assets/post_temp/7.jpg'
 
+const imgList = [img1, img2, img3, img4, img5, img6, img7]
 
 const PostList = ({postList}) => {
-
- 
  
   return (
     <Box display={'flex'} justifyContent={'center'} marginTop={'2rem'}>
       <Masonry columns={{ md: 4, sm: 3 }} spacing={2}>
-        <PostCard imgSrc={img1} postId={1}></PostCard>
-        <PostCard imgSrc={img2} postId={2}></PostCard>
-        <PostCard imgSrc={img3} postId={3}></PostCard>
-        <PostCard imgSrc={img4} postId={4}></PostCard>
-        <PostCard imgSrc={img5} postId={5}></PostCard>
-        <PostCard imgSrc={img6} postId={6}></PostCard>
-        <PostCard imgSrc={img7} postId={7}></PostCard>
-        {postList.map((post) => {
+        {postList.map((post, idx) => {
           return (
             <PostCard 
               key={post.postId} 
-              imgSrc={img7}
+              imgSrc={imgList[idx % 7]}
               postId={post.postId}
             ></PostCard>)
         })}

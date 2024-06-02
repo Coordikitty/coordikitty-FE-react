@@ -33,13 +33,14 @@ const Post = () => {
     } else {
       ; (async () => {
         const res = await getPostApi(postId)
+        console.log('getPostApi res : ', res)
         setPostData(res)
       })()
     }
   }, [postId, navigate])
 
   const handleLike = async() => {
-    setPostData({...postData, isLiked: !postData.isLiked})
+    setPostData({...postData, isLiked: !postData.isLiked, postLike : postData.isLiked? postData.postLike - 1 : postData.postLike + 1})
   }
 
   const handleBookmark = async() => {
@@ -49,14 +50,14 @@ const Post = () => {
   return (
     <Container maxWidth='sm' >
       {postData ? 
-        <Stack spacing={2}
+        <Stack spacing={1}
           padding={'2rem'} margin={'2rem 0'} borderRadius={'0.75rem'}
           boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
         >
           <Stack direction={'row'} justifyContent={'space-between'}>
             <Stack direction={'row'} alignItems={'center'} spacing={2}>
               <Avatar alt='test'></Avatar>
-              <Typography variant='h3'>{'User name'}</Typography>
+              <Typography variant='h3'>{postData.uploaderNickname}</Typography>
             </Stack>
             <Button variant={'outlined'} size='small' color='black'>Follow</Button>
           </Stack>
@@ -67,12 +68,12 @@ const Post = () => {
           {/* 좋아요 / 북마크 */}
           <Stack direction={'row'} justifyContent={'space-between'}>
             <Button color='black' size='large' onClick={handleLike}
-              startIcon={postData.isLiked ? <FavoriteIcon></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}>
+              startIcon={postData.isLiked ? <FavoriteIcon color='secondary'></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}>
               <Typography variant='h3' paddingTop={'0.2rem'}>{postData.postLike}</Typography>
             </Button>
             <IconButton color='black' size='large' onClick={handleBookmark}>
               {postData.isBookmarked ? 
-                <BookmarkIcon fontSize='large'></BookmarkIcon> : <BookmarkBorderIcon fontSize='large'></BookmarkBorderIcon>
+                <BookmarkIcon color='secondary' fontSize='large'></BookmarkIcon> : <BookmarkBorderIcon fontSize='large'></BookmarkBorderIcon>
               }
             </IconButton>
           </Stack>
