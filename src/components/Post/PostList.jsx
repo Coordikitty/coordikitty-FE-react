@@ -5,17 +5,6 @@ import {
 import Masonry from '@mui/lab/Masonry'
 import PostCard from './PostCard'
 
-
-import img1 from '../../assets/post_temp/1.jpg'
-import img2 from '../../assets/post_temp/2.jpg'
-import img3 from '../../assets/post_temp/3.jpg'
-import img4 from '../../assets/post_temp/4.jpg'
-import img5 from '../../assets/post_temp/5.jpg'
-import img6 from '../../assets/post_temp/6.jpg'
-import img7 from '../../assets/post_temp/7.jpg'
-
-const imgList = [img1, img2, img3, img4, img5, img6, img7]
-
 const PostList = ({postList}) => {
  
   return (
@@ -25,7 +14,7 @@ const PostList = ({postList}) => {
           return (
             <PostCard 
               key={post.postId} 
-              imgSrc={imgList[idx % 7]}
+              imgSrc={post.postImgs[0]}
               postId={post.postId}
             ></PostCard>)
         })}

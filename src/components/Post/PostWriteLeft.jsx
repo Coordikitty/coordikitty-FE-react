@@ -33,7 +33,7 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
     </Box>
 
     {/* Selected img list */}
-    {/* <Stack direction={'row'} spacing={1}
+    <Stack direction={'row'} spacing={1}
       width={"100%"} height={"7rem"}
       marginTop={"1rem"}
       backgroundColor={'gray'}
@@ -42,15 +42,16 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
         height={'100%'} borderRadius={'0.75rem'} overflow={'hidden'}
         sx={{ aspectRatio: 1 }}
       >
-        <img src={testImg} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+        {}
+        <img src={preview} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
       </Box>
-    </Stack> */}
-    {/* File input */}
+    </Stack>
     
     <Button 
       variant='contained' fullWidth disableElevation
       onClick={handleImgUploadBtn}
-    >사진 추가</Button>
+      >사진 추가</Button>
+    {/* File input */}
     <input 
       type='file' ref={fileInputRef} onChange={handleImgFile} accept='image/*'
       style={{display: 'none'}}></input>

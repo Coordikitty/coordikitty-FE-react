@@ -28,14 +28,19 @@ const PostWrite = () => {
   const handleModalClose = () => setModalOpen(false);
 
   const handleSubmit = async() => {
-    const data = {
-      content,
-      postImgs,
-      clothIds,
-      style
-    }
     try {
-      const res = await postUploadApi(data)
+      const formData = new FormData()
+      const data = {
+        content,
+        clothIds,
+        style
+      }
+      formData.append('postUploadRequestDto', new Blob([JSON.stringify(data)], {type: 'application/json'}))
+      postImgs.map((postImg) => {
+        formData.append('postImgs', postImg)
+        return null
+      })
+      const res = await postUploadApi(formData)
       console.log('postUploadApi res : ', res)
       alert('포스트 업로드 성공')
       navigate('/posts')

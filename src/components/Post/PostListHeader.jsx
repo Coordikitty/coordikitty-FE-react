@@ -17,7 +17,6 @@ const PostListHeader = () => {
   const [tap, setTap] = useState(0)
   const [postList, setPostList] = useState([])
   const handleTap = (e, targetTap) => {
-    console.log(targetTap)
     setTap(targetTap)
   }
 
