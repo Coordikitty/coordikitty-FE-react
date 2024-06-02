@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   Box,
   Stack,
@@ -6,9 +6,11 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  Button
+  Button,
+  IconButton
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ClothesAppendModal from './ClothesAppendModal'
 import clothesInfo from '../../utils/clothesInfo'
 import temp1 from '../../assets/post_temp/1.jpg'
@@ -16,25 +18,47 @@ import temp2 from '../../assets/post_temp/2.jpg'
 import temp3 from '../../assets/post_temp/3.jpg'
 import temp4 from '../../assets/post_temp/4.jpg'
 import temp5 from '../../assets/post_temp/5.jpg'
+import deleteClosetApi from '../../apis/closet/deleteClosetApi';
+import getClosetApi from '../../apis/closet/getClosetApi';
 
-const fakeData = [
-  {clothId: 1, clothURL: temp1},
-  {clothId: 2, clothURL: temp2},
-  {clothId: 3, clothURL: temp3},
-  {clothId: 4, clothURL: temp4},
-  {clothId: 5, clothURL: temp5},
-]
 
 const Closet = ({selectTool}) => {
 
   const [type, setType] = useState('')
   const [modalOpen, setModalOpen] = useState(false);
-  const [clothesList, setClothesList] = useState(fakeData)
+  const [clothesList, setClothesList] = useState([])
   
   const handleType = e => setType(e.target.value)
 
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+
+  const handleDelete = async(clothId) => {
+    if(window.confirm("삭제하시겠습니까?")) {
+      try {
+        const res = await deleteClosetApi(clothId)
+        console.log('deleteClosetApi res : ', res)
+        setClothesList(clothesList.filter(el => el.clothId !== clothId))
+        alert('삭제 완료')
+      } catch (error) {
+        console.error(error)
+      }
+    } else {
+      alert('삭제가 취소되었습니다')
+    }
+  }
+
+  useEffect(() => {
+    ;(async() => {
+      try {
+        const res = await getClosetApi()
+        console.log('getClosetApi res : ', res)
+        setClothesList(res)
+      } catch (error) {
+        console.error(error)
+      }
+    })()
+  }, [modalOpen])
 
   
 
@@ -70,6 +94,7 @@ const Closet = ({selectTool}) => {
             key={clothes.clothId}
             clothesData={clothes}
             selectTool={selectTool}
+            handleDelete={handleDelete}
           ></ClothesCard>
         })}
       </Stack>
@@ -78,7 +103,7 @@ const Closet = ({selectTool}) => {
   )
 }
 
-const ClothesCard = ({clothesData, selectTool}) => {
+const ClothesCard = ({clothesData, selectTool, handleDelete}) => {
 
   const theme = useTheme()
 
@@ -87,17 +112,19 @@ const ClothesCard = ({clothesData, selectTool}) => {
       const index = selectTool.clothIds.indexOf(clothesData.clothId);
       if (index !== -1) {
         selectTool.setClothIds(selectTool.clothIds.filter(el => el !== clothesData.clothId))
-        selectTool.setClothImgs(selectTool.clothImgs.filter(el => el !== clothesData.clothURL))
+        selectTool.setClothImgs(selectTool.clothImgs.filter(el => el !== clothesData.imageUrl))
       } else {
         selectTool.setClothIds([...selectTool.clothIds, clothesData.clothId])
-        selectTool.setClothImgs([...selectTool.clothImgs, clothesData.clothURL])
+        selectTool.setClothImgs([...selectTool.clothImgs, clothesData.imageUrl])
       }
     }
   }
 
+
   return (
     <Box onClick={handleSelect}>
       <Box sx={{
+          position: 'relative',
           width: '20rem',
           height: '30rem',
           borderRadius: '0.75rem',
@@ -106,8 +133,8 @@ const ClothesCard = ({clothesData, selectTool}) => {
           transition: '0.3s',
         }}>
         <img 
-          src={clothesData.clothURL} 
-          alt={clothesData.clothURL}
+          src={clothesData.imageUrl} 
+          alt={clothesData.imageUrl}
           loading='lazy'
           style={{
             borderRadius: '0.75rem',
@@ -117,6 +144,9 @@ const ClothesCard = ({clothesData, selectTool}) => {
             transition: '0.3s',
           }}
         />
+        <IconButton sx={{position: 'absolute', bottom: '0', right: '0'}} onClick={() => {handleDelete(clothesData.clothId)}}>
+          <DeleteIcon fontSize='large'></DeleteIcon>
+        </IconButton>
       </Box>
     </Box>
   )
