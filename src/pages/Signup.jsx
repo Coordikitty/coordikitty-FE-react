@@ -15,6 +15,9 @@ import AccountInfo from '../components/Signup/AccountInfo'
 import BasicInfo from '../components/Signup/BasicInfo'
 import StyleInfo from '../components/Signup/StyleInfo'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import signupApi from '../apis/auth/signupApi'
+
 const steps = [
   '약관 동의',
   '계정 정보 입력',
@@ -24,9 +27,10 @@ const steps = [
 
 const Signup = () => {
 
+  const navigate = useNavigate()
+
   const { 
     handleSubmit,
-    getValues,
     setValue,
   } = useForm()
 
@@ -35,12 +39,20 @@ const Signup = () => {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1)
-    console.log(getValues())
   }
   const handlePrev = () => setActiveStep(activeStep - 1)
   
-  const onSubmit = (data) => {
-    console.log("Sign up : ", data)
+  const onSubmit = async (data) => {    
+    try {
+      const res = await signupApi(data)
+      console.log('signupApi res : ', res)
+      alert('회원가입 성공')
+      navigate('/')
+    } catch (error) {
+      alert('회원가입 실패')
+      console.error(error)
+    }
+
   }
 
   return (

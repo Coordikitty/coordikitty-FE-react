@@ -1,18 +1,18 @@
 const seasonInfo = [
   {
-    val : "spring",
+    val : "SPRING",
     kr : "봄"
   },
   {
-    val : "summer",
+    val : "SUMMER",
     kr : "여름"
   },
   {
-    val : "autumn",
+    val : "FALL",
     kr : "가을"
   },
   {
-    val : "winter",
+    val : "WINTER",
     kr : "겨울"
   }
 ]

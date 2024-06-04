@@ -3,14 +3,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm, Controller, } from 'react-hook-form'
-const AccountInfo = ({setNextVaild, parentSetValue}) => {
+const GoogleAccountInfo = ({setNextVaild, parentSetValue}) => {
 
   const { 
     register, 
     control,
-    watch,
     getValues,
     formState: {errors, isValid},
   } = useForm({
@@ -19,14 +18,6 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
       phoneNumber: ''
     }
   })
-
-  const [emailDupCheck, setEmailDupCheck] = useState(false)
-  const [nicknameDupCheck, setNicknameDupCheck] = useState(false)
-
-  useEffect(() => {
-    console.log("email : ", emailDupCheck)
-    console.log("nickname : ", nicknameDupCheck)
-  }, [emailDupCheck, nicknameDupCheck])
 
 
   const handlePhoneNumberChange = (value) => {
@@ -61,22 +52,6 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
   return (
     <Box width={'70%'}>
 
-      <Box>
-        <TextField
-          id="email" type='email' label="이메일"
-          variant="standard" margin='dense' fullWidth
-          {...register("email", {
-            required: "이메일을 입력해 주세요.",
-            pattern: {
-              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              message: "이메일 형식에 맞지 않습니다.",
-              check: () => {
-
-              }
-            },
-          })} />
-        {errors.email && <Typography color={'error'}>{errors.email.message}</Typography>}
-      </Box>
 
       <Box>
         <TextField
@@ -102,36 +77,6 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
         {errors.nickname && <Typography color={'error'}>{errors.nickname.message}</Typography>}
       </Box>
 
-      <Box>
-        <TextField
-          id="password" type='password' label="비밀번호"
-          variant="standard" margin='dense' fullWidth
-          {...register("password", {
-            required: "비밀번호를 입력해 주세요.",
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,16}$/,
-              message: "8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.",
-            },
-          })} />
-        {errors.password && <Typography color={'error'}>{errors.password.message}</Typography>}
-      </Box>
-
-      <Box>
-        <TextField
-          id="password_check" type='password' label="비밀번호 확인"
-          variant="standard" margin='dense' fullWidth
-          {...register("password_check", {
-            required: "비밀번호를 확인을 입력해 주세요.",
-            validate: {
-              check: (val) => {
-                if (watch("password") !== val) {
-                  return "비밀번호가 일치하지 않습니다.";
-                }
-              },
-            }
-          })} />
-        {errors.password_check && <Typography color={'error'}>{errors.password_check.message}</Typography>}
-      </Box>
 
       <Box>
         <TextField
@@ -199,4 +144,4 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
 
 
 
-export default AccountInfo
+export default GoogleAccountInfo

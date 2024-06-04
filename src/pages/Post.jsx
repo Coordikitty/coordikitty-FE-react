@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { 
+import {
   Box,
   Container,
   Stack,
@@ -8,67 +8,135 @@ import {
   Button,
   IconButton,
   Divider,
-  Avatar
+  Avatar,
+  Skeleton,
 } from '@mui/material'
 import { styled } from '@mui/system';
+import { useSelector } from 'react-redux';
+import getPostApi from '../apis/post/getPostApi';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import tempImg from '../assets/temp.jpg'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import seasonInfo from '../utils/seasonInfo';
+import styleInfo from '../utils/styleInfo';
 
 const Post = () => {
-  
+
+  const email = useSelector(state => state.user.email)
   const { postId } = useParams()
+  const [postData, setPostData] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!postId) navigate('/posts')
-  }, [postId, navigate])
-  
+    if (!postId) {
+      navigate('/posts')
+    } else {
+      ;(async () => {
+        const res = await getPostApi(postId)
+        console.log('getPostApi res : ', res)
+        setPostData(res)
+      })()
+    }
+  }, [postId, navigate, email])
+
+  const handleLike = async() => {
+    setPostData({...postData, isLiked: !postData.isLiked, postLike : postData.isLiked? postData.postLike - 1 : postData.postLike + 1})
+  }
+
+  const handleBookmark = async() => {
+    setPostData({...postData, isBookmarked: !postData.isBookmarked})
+  }
+
   return (
     <Container maxWidth='sm' >
-      <Stack spacing={2}
-        padding={'2rem'} margin={'2rem 0'} borderRadius={'0.75rem'}
-        boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"} 
-      >
-        <Stack direction={'row'} justifyContent={'space-between'}>
-          <Stack direction={'row'} alignItems={'center'} spacing={2}>
-            <Avatar alt='test'></Avatar>
-            <Typography variant='h3'>{'User name'}</Typography>
+      {postData ? 
+        <Stack spacing={1}
+          padding={'2rem'} margin={'2rem 0'} borderRadius={'0.75rem'}
+          boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
+        >
+          <Stack direction={'row'} justifyContent={'space-between'}>
+            <Stack direction={'row'} alignItems={'center'} spacing={2}>
+              <Avatar alt='test'></Avatar>
+              <Typography variant='h3'>{postData.uploaderNickname}</Typography>
+            </Stack>
+            {email === postData.uploaderEmail ? 
+              <Box>
+                <IconButton color='black' size='large' onClick={() => {}}>
+                  <DeleteIcon fontSize='large'></DeleteIcon>
+                </IconButton>
+                <IconButton color='black' size='large' onClick={() => {}}>
+                  <EditIcon fontSize='large'></EditIcon>
+                </IconButton>
+              </Box> 
+              :
+              <Button variant={'outlined'} size='small' color='black'>Follow</Button>
+            }
           </Stack>
-          <Button variant={'outlined'} size='small' color='black'>Follow</Button>
-        </Stack>
 
-        {/* 이미지 */}
-        <img src={tempImg} alt={'test'} style={{ width: '100%', height: 'calc(100vh - 28rem)', objectFit: 'contain' }}></img>
+          {/* 이미지 */}
+          {postData.postImgs.map((img) => {
+            return <img src={img} alt={img} style={{ width: '100%', borderRadius: '0.75rem', objectFit: 'contain' }}></img>
+          })}
+          
 
-        {/* 좋아요 / 북마크 */}
-        <Stack direction={'row'} justifyContent={'space-between'}>
-          <Button color='black' size='large' startIcon={<FavoriteIcon></FavoriteIcon>}>
-            <Typography variant='h3' paddingTop={'0.2rem'}>좋아요</Typography>
-          </Button>
-          <IconButton color='black' size='large'>
-            <BookmarkIcon fontSize='large'></BookmarkIcon>
-          </IconButton>
-        </Stack>
+          {/* 좋아요 / 북마크 */}
+          <Stack direction={'row'} justifyContent={'space-between'}>
+            <Button color='black' size='large' onClick={handleLike} disabled={!email}
+              startIcon={postData.isLiked ? <FavoriteIcon color='secondary'></FavoriteIcon> : <FavoriteBorderIcon></FavoriteBorderIcon>}>
+              <Typography variant='h3' paddingTop={'0.2rem'}>{postData.postLike}</Typography>
+            </Button>
+            <Stack direction={'row'}>
+              <IconButton color='black' size='large' onClick={handleBookmark} disabled={!email}>
+                {postData.isBookmarked ? 
+                  <BookmarkIcon color='secondary' fontSize='large'></BookmarkIcon> : <BookmarkBorderIcon fontSize='large'></BookmarkBorderIcon>
+                }
+              </IconButton>
+            </Stack>
+          </Stack>
 
-        <Stack spacing={1}>
-          <Divider></Divider>
           {/* 본문 */}
-          <Typography variant='body1'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit illo, tempore fugiat possimus magnam, magni, ab dolorum reprehenderit a quia ad molestias eaque? Debitis facilis consectetur, optio totam aut ut!
-          </Typography>
+          <Stack spacing={1}>
+            <Divider></Divider>
+            {/* 본문 */}
+            <Typography variant='body1'>
+              {postData.content}
+            </Typography>
 
-          {/* 글 정보 */}
-          <Typography variant='body2' color={'primary'}>
-            <InfoSpan>상황 : {'데일리'}</InfoSpan>
-            <InfoSpan>계절 : {'봄'}</InfoSpan>
-            <InfoSpan>스타일 : {'케주얼'}</InfoSpan>
-          </Typography>
-          <Divider></Divider>
+            {/* 글 정보 */}
+            <Typography variant='body2' color={'primary'}>
+              <InfoSpan>상황 : {postData.situation}</InfoSpan>
+              <InfoSpan>계절 : {(seasonInfo.find(el => el.val === postData.season)?.kr)}</InfoSpan>
+              <InfoSpan>스타일 : {(styleInfo.find(el => el.style === postData.style)?.kr)}</InfoSpan>
+              <InfoSpan>업로드 날자 : {Date(postData.uploadDate).slice(0, -17)}</InfoSpan>
+            </Typography>
+            <Divider></Divider>
+          </Stack>
         </Stack>
+        : // Skelton
+        <Stack spacing={2}
+          padding={'2rem'} margin={'2rem 0'} borderRadius={'0.75rem'}
+          boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
+        >
+          <Stack direction={'row'} justifyContent={'space-between'}>
+            <Stack direction={'row'} alignItems={'center'} spacing={2}>
+              <Skeleton variant="circular">
+                <Avatar />
+              </Skeleton>
+              <Skeleton>
+                <Typography variant="h3">Loading...</Typography>
+              </Skeleton>
+            </Stack>
+          </Stack>
+          <Skeleton variant='rectangular' width={'100%'} height={'calc(100vh - 28rem)'}></Skeleton>
+          <Skeleton variant='rectangular' width={'100%'} height={30}></Skeleton>
+        </Stack>
+      }
 
 
-      </Stack>
+
 
     </Container>
   )
@@ -76,8 +144,8 @@ const Post = () => {
 
 const InfoSpan = styled('span')((props) => {
   return {
-    '&::after' : {
-      content : "' / '"
+    '&::after': {
+      content: "' / '"
     }
   }
 })

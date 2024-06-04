@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   Tab,
   Box,
@@ -7,15 +7,33 @@ import {
   Button
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import {loggedGetPostListApi, unLoggedGetPostListApi} from '../../apis/post/getPostListApi';
 import Tabs from '@mui/material/Tabs';
 import PostList from './PostList';
 const PostListHeader = () => {
   const navigate = useNavigate()
+  const accessToken = useSelector(state => state.user.accessToken)
   const [tap, setTap] = useState(0)
+  const [postList, setPostList] = useState([])
   const handleTap = (e, targetTap) => {
-    console.log(targetTap)
     setTap(targetTap)
   }
+
+  useEffect(() => {
+    const fetch = async() => {
+      if(accessToken) {
+        const res = await loggedGetPostListApi()
+        console.log('loggedGetPostListApi res : ', res)
+        setPostList(res)
+      } else {
+        const res = await unLoggedGetPostListApi()
+        console.log('unLoggedGetPostListApi res : ', res)
+        setPostList(res)
+      }
+    }
+    fetch()
+  }, [accessToken])
 
   return (
     <Box>
@@ -39,7 +57,7 @@ const PostListHeader = () => {
           <Tab label="추천 포스트" />
         </Tabs>
       </Box>
-      <PostList></PostList>
+      <PostList postList={postList}></PostList>
     </Box>
   )
 }
