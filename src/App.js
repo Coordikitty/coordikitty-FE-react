@@ -1,27 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header/Header";
+import { Container } from "@mui/material";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "./redux/UserReducer";
+import tokenRefreshApi from "./apis/auth/tokenRefresh";
 function App() {
+
+  const [cookies, setCookie] = useCookies(['refreshToken'])
+  const accessToken = useSelector(state => state.user.accessToken) 
+  const refreshToken = cookies.refreshToken
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+    if(!accessToken && refreshToken) {
+      ;(async() => {
+        try {
+          const res = await tokenRefreshApi({refreshToken})
+          console.log("tokenRefreshApi res : ", res)
+          dispatch(login({
+            email : res.email,
+            nickname : res.nickname,
+            accessToken : res.tokenDto.accessToken
+          }))
+          setCookie('refreshToken', res.tokenDto.refreshToken)
+        } catch (error) {
+          console.error(error)
+        }
+
+      })()
+    }
+  }, [refreshToken])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <h1>This is jira test???</h1>
-        <h1>Jira branch Test</h1>
-        <h1>Jira branch Final Test</h1>
-      </header>
-    </div>
+      <Container maxWidth="md" >
+        <Header></Header>
+        <Outlet></Outlet>
+      </Container>
   );
 }
 

@@ -38,6 +38,7 @@ master
  ├─ styles      : CSS 파일(혹은)
  ├─ api         : API 로직
  ├─ utils       : 정규표현식 / 공통함수 등
+ ├─ router.js   : 라우팅 객체
  ├─ App.js
  └─ index.js
 ```
