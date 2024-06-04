@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/coordikitty-FE-react/static/js/main.ad01bc86.js",
-    "static/media/3.jpg": "/coordikitty-FE-react/static/media/3.9bf7a8234db64b01a8e5.jpg",
-    "static/media/5.jpg": "/coordikitty-FE-react/static/media/5.c9721446c3cad8cb8e5a.jpg",
-    "static/media/sporty.jpg": "/coordikitty-FE-react/static/media/sporty.c5df7ca45526bfea8e27.jpg",
-    "static/media/formal.jpg": "/coordikitty-FE-react/static/media/formal.ebe9bcd536c9a96367ed.jpg",
-    "static/media/1.jpg": "/coordikitty-FE-react/static/media/1.1908bdd42ba13ab2afc5.jpg",
-    "static/media/street.jpg": "/coordikitty-FE-react/static/media/street.c5c2ddaf6bc95dc0c283.jpg",
-    "static/media/minimal.jpg": "/coordikitty-FE-react/static/media/minimal.94129d5f60cf7492dced.jpg",
-    "static/media/2.jpg": "/coordikitty-FE-react/static/media/2.a12e214cda6c449db3d6.jpg",
-    "static/media/LogoWide.png": "/coordikitty-FE-react/static/media/LogoWide.941b90d0c7d3ee3f0c39.png",
-    "static/media/4.jpg": "/coordikitty-FE-react/static/media/4.28f46700c5ce266354ae.jpg",
-    "static/media/casual.jpg": "/coordikitty-FE-react/static/media/casual.bebe653c058ee01ad241.jpg",
-    "static/media/GoogleLogin.svg": "/coordikitty-FE-react/static/media/GoogleLogin.48a8be0745431c811da76da2de5c4c5c.svg",
-    "index.html": "/coordikitty-FE-react/index.html",
-    "main.ad01bc86.js.map": "/coordikitty-FE-react/static/js/main.ad01bc86.js.map"
+    "main.js": "/static/js/main.d47a549c.js",
+    "static/media/3.jpg": "/static/media/3.9bf7a8234db64b01a8e5.jpg",
+    "static/media/5.jpg": "/static/media/5.c9721446c3cad8cb8e5a.jpg",
+    "static/media/sporty.jpg": "/static/media/sporty.c5df7ca45526bfea8e27.jpg",
+    "static/media/formal.jpg": "/static/media/formal.ebe9bcd536c9a96367ed.jpg",
+    "static/media/1.jpg": "/static/media/1.1908bdd42ba13ab2afc5.jpg",
+    "static/media/street.jpg": "/static/media/street.c5c2ddaf6bc95dc0c283.jpg",
+    "static/media/minimal.jpg": "/static/media/minimal.94129d5f60cf7492dced.jpg",
+    "static/media/2.jpg": "/static/media/2.a12e214cda6c449db3d6.jpg",
+    "static/media/LogoWide.png": "/static/media/LogoWide.941b90d0c7d3ee3f0c39.png",
+    "static/media/4.jpg": "/static/media/4.28f46700c5ce266354ae.jpg",
+    "static/media/casual.jpg": "/static/media/casual.bebe653c058ee01ad241.jpg",
+    "static/media/GoogleLogin.svg": "/static/media/GoogleLogin.48a8be0745431c811da76da2de5c4c5c.svg",
+    "index.html": "/index.html",
+    "main.d47a549c.js.map": "/static/js/main.d47a549c.js.map"
   },
   "entrypoints": [
-    "static/js/main.ad01bc86.js"
+    "static/js/main.d47a549c.js"
   ]
 }
