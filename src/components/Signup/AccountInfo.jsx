@@ -3,7 +3,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, Controller, } from 'react-hook-form'
 const AccountInfo = ({setNextVaild, parentSetValue}) => {
 
@@ -19,6 +19,14 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
       phoneNumber: ''
     }
   })
+
+  const [emailDupCheck, setEmailDupCheck] = useState(false)
+  const [nicknameDupCheck, setNicknameDupCheck] = useState(false)
+
+  useEffect(() => {
+    console.log("email : ", emailDupCheck)
+    console.log("nickname : ", nicknameDupCheck)
+  }, [emailDupCheck, nicknameDupCheck])
 
 
   const handlePhoneNumberChange = (value) => {
@@ -62,6 +70,9 @@ const AccountInfo = ({setNextVaild, parentSetValue}) => {
             pattern: {
               value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
               message: "이메일 형식에 맞지 않습니다.",
+              check: () => {
+
+              }
             },
           })} />
         {errors.email && <Typography color={'error'}>{errors.email.message}</Typography>}

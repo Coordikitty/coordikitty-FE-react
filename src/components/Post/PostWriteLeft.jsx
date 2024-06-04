@@ -19,7 +19,6 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
     setPreview(URL.createObjectURL(file));
   }
 
-
   return (
     <Stack width={'100%'} padding={"1rem 0.5rem"} justifyContent={'space-between'} spacing={1}>
     {/* Preview */}
@@ -36,15 +35,13 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
     <Stack direction={'row'} spacing={1}
       width={"100%"} height={"7rem"}
       marginTop={"1rem"}
-      backgroundColor={'gray'}
     >
-      <Box
-        height={'100%'} borderRadius={'0.75rem'} overflow={'hidden'}
-        sx={{ aspectRatio: 1 }}
-      >
-        {}
-        <img src={preview} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
-      </Box>
+        {postImgs.map((imgFile) => {
+          const img = URL.createObjectURL(imgFile)
+          return <Box height={'100%'} borderRadius={'0.75rem'} overflow={'hidden'} onClick={() => {setPreview(img)}}>
+            <img src={img} alt={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+          </Box>
+        })}
     </Stack>
     
     <Button 

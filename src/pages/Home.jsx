@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   Box,
   Stack,
@@ -26,7 +26,6 @@ const Home = () => {
   const [lv1, SetLv1] = useState(STYLE)
   const [lv2, SetLv2] = useState('')
   const accessToken = useSelector(state => state.user.accessToken)
-
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -35,6 +34,25 @@ const Home = () => {
     SetLv1(e.target.value)
   } 
   const handleLv2 = e => SetLv2(e.target.value) 
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      // Success
+      async(position) => {
+        const lat = position.coords.latitude
+        const lon = position.coords.longitude
+        console.log('lat', lat)
+        console.log('lon', lon)
+      },
+      // Fail
+      async(error) => {
+        const lat = 37.541
+        const lon = 126.986
+        console.log('lat', lat)
+        console.log('lon', lon)
+      },
+    )
+  }, [])
 
   return (
     <React.Fragment>
