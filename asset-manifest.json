@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/coordikitty-FE-react/static/js/main.98f05185.js",
+    "main.js": "/coordikitty-FE-react/static/js/main.44357a10.js",
     "static/media/3.jpg": "/coordikitty-FE-react/static/media/3.9bf7a8234db64b01a8e5.jpg",
     "static/media/5.jpg": "/coordikitty-FE-react/static/media/5.c9721446c3cad8cb8e5a.jpg",
     "static/media/sporty.jpg": "/coordikitty-FE-react/static/media/sporty.c5df7ca45526bfea8e27.jpg",
@@ -14,9 +14,9 @@
     "static/media/casual.jpg": "/coordikitty-FE-react/static/media/casual.bebe653c058ee01ad241.jpg",
     "static/media/GoogleLogin.svg": "/coordikitty-FE-react/static/media/GoogleLogin.48a8be0745431c811da76da2de5c4c5c.svg",
     "index.html": "/coordikitty-FE-react/index.html",
-    "main.98f05185.js.map": "/coordikitty-FE-react/static/js/main.98f05185.js.map"
+    "main.44357a10.js.map": "/coordikitty-FE-react/static/js/main.44357a10.js.map"
   },
   "entrypoints": [
-    "static/js/main.98f05185.js"
+    "static/js/main.44357a10.js"
   ]
 }
