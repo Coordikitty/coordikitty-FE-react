@@ -15,8 +15,10 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
   }
   const handleImgFile = (e) => {
     const file = e.target.files[0]
-    setPostImgs([...postImgs, file])
-    setPreview(URL.createObjectURL(file));
+    if (file) {
+      setPostImgs([...postImgs, file])
+      setPreview(URL.createObjectURL(file));
+    }
   }
 
   return (
@@ -39,7 +41,7 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
         {postImgs.map((imgFile) => {
           const img = URL.createObjectURL(imgFile)
           return <Box height={'100%'} borderRadius={'0.75rem'} overflow={'hidden'} onClick={() => {setPreview(img)}}>
-            <img src={img} alt={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+            <img src={img} key={img} alt={img} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
           </Box>
         })}
     </Stack>
