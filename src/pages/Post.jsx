@@ -22,6 +22,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import seasonInfo from '../utils/seasonInfo';
 import styleInfo from '../utils/styleInfo';
+import deletePostApi from '../apis/post/deletePostApi';
 
 const Post = () => {
 
@@ -50,6 +51,18 @@ const Post = () => {
     setPostData({...postData, isBookmarked: !postData.isBookmarked})
   }
 
+  const handleDelete = async() => {
+    try {
+      const res = await deletePostApi(postId)
+      console.log('deletePostApi res :', res)
+      alert('포스트 삭제 성공')
+      navigate('/posts')
+    } catch (error) {
+      alert('포스트 삭제 실패')
+      console.error(error);
+    }
+  }
+
   return (
     <Container maxWidth='sm' >
       {postData ? 
@@ -64,7 +77,7 @@ const Post = () => {
             </Stack>
             {email === postData.uploaderEmail ? 
               <Box>
-                <IconButton color='black' size='large' onClick={() => {}}>
+                <IconButton color='black' size='large' onClick={handleDelete}>
                   <DeleteIcon fontSize='large'></DeleteIcon>
                 </IconButton>
                 <IconButton color='black' size='large' onClick={() => {}}>
