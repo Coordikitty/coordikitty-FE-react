@@ -6,6 +6,7 @@ import {
   Box
 } from '@mui/material'
 import SigninModal from './Header/SigninModal';
+import RequiredSigninImg from '../assets/RequiredSigninImg.jpg'
 
 const RequiredSignin = () => {
 
@@ -15,17 +16,22 @@ const RequiredSignin = () => {
 
 
   return (
-    <Stack spacing={2}
-      marginTop={'2rem'} borderRadius={'0.75rem'} 
+    <Box
+      marginTop={'2rem'} borderRadius={'0.75rem'} overflow={'hidden'}
+      height={'calc(100vh - 16rem)'}
       boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px"}
-      padding={'10rem'} alignItems={'center'}
+      sx={{backgroundImage: `url(${RequiredSigninImg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}
     >
-      <Typography variant='h1' color={'black'}>
-        로그인 후 이용해보세요!
+      <Stack spacing={2} alignItems={'center'} justifyContent={'center'}
+        height={'100%'} width={'100%'} padding={'10rem'}
+        sx={{backgroundColor: 'rgba(0,0,0,0.4)'}}
+      >
+      <Typography variant='h1' color={'white'} paddingTop={'10rem'}>
+        Coordikitty의 코디 추천시스템을 만나보세요!
       </Typography>
-      <Box width={'30%'}>
+      <Box width={'30rem'}>
         <Button 
-          color='secondary' variant='contained' fullWidth size='large' disableElevation
+          color='secondary' variant='contained' fullWidth  disableElevation
           onClick={handleModalOpen}
         >
           로그인
@@ -35,7 +41,8 @@ const RequiredSignin = () => {
         modalOpen={modalOpen} 
         handleModalClose={handleModalClose}
       ></SigninModal>
-    </Stack>
+      </Stack>
+    </Box>
   )
 }
 
