@@ -13,18 +13,13 @@ import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ClothesAppendModal from './ClothesAppendModal'
 import clothesInfo from '../../utils/clothesInfo'
-import temp1 from '../../assets/post_temp/1.jpg'
-import temp2 from '../../assets/post_temp/2.jpg'
-import temp3 from '../../assets/post_temp/3.jpg'
-import temp4 from '../../assets/post_temp/4.jpg'
-import temp5 from '../../assets/post_temp/5.jpg'
 import deleteClosetApi from '../../apis/closet/deleteClosetApi';
 import getClosetApi from '../../apis/closet/getClosetApi';
 
 
 const Closet = ({selectTool}) => {
 
-  const [type, setType] = useState('')
+  const [type, setType] = useState('ALL')
   const [modalOpen, setModalOpen] = useState(false);
   const [clothesList, setClothesList] = useState([])
   
@@ -73,6 +68,7 @@ const Closet = ({selectTool}) => {
             value={type}
             onChange={handleType}
           >
+            <MenuItem value={'ALL'}>ALL</MenuItem>
             {Object.keys(clothesInfo).map(el => {
               return <MenuItem key={el} value={el}>{clothesInfo[el]['kr']}</MenuItem>
             })}
@@ -90,12 +86,16 @@ const Closet = ({selectTool}) => {
       </Stack>
       <Stack direction={'row'} sx={{overflowX: 'scroll', overflowY: 'hidden'}} margin={'2rem 0'} spacing={2} >
         {clothesList.map((clothes) => {
-          return <ClothesCard 
-            key={clothes.clothId}
-            clothesData={clothes}
-            selectTool={selectTool}
-            handleDelete={handleDelete}
-          ></ClothesCard>
+          if(type === 'ALL' || type === clothes.large) {
+            return <ClothesCard 
+              key={clothes.clothId}
+              clothesData={clothes}
+              selectTool={selectTool}
+              handleDelete={handleDelete}
+            ></ClothesCard>
+          } else {
+            return null
+          }
         })}
       </Stack>
     </React.Fragment>
