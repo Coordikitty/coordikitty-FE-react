@@ -78,7 +78,7 @@ const Post = () => {
 
           {/* 이미지 */}
           {postData.postImgs.map((img) => {
-            return <img src={img} alt={img} style={{ width: '100%', borderRadius: '0.75rem', objectFit: 'contain' }}></img>
+            return <img src={img} key={img} alt={img} style={{ width: '100%', borderRadius: '0.75rem', objectFit: 'contain' }}></img>
           })}
           
 
