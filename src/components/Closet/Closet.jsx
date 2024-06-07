@@ -9,6 +9,13 @@ import {
   Button,
   IconButton
 } from '@mui/material'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import '../Swiper.css'
+
 import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ClothesAppendModal from './ClothesAppendModal'
@@ -84,7 +91,55 @@ const Closet = ({selectTool}) => {
         </Button>
         <ClothesAppendModal modalOpen={modalOpen} handleModalClose={handleModalClose}></ClothesAppendModal>
       </Stack>
-      <Stack direction={'row'} sx={{overflowX: 'scroll', overflowY: 'hidden'}} margin={'2rem 0'} spacing={2} >
+      
+
+      <Swiper
+        key={clothesList.length}
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 3,
+          slideShadows: false
+        }}
+        pagination={{
+          el: '.swiper-pagination',
+          clickable: true
+        }}
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        className="mySwiper"
+      >
+        {clothesList.map((clothes) => {
+          if(type === 'ALL' || type === clothes.large) {
+            return <SwiperSlide style={{width: '20rem'}}>
+              <ClothesCard 
+                key={clothes.clothId}
+                clothesData={clothes}
+                selectTool={selectTool}
+                handleDelete={handleDelete}
+              ></ClothesCard>
+            </SwiperSlide> 
+          } else {
+            return null
+          }
+        })}
+
+        <div className="slider-controler">
+          <div className="swiper-pagination"></div>
+        </div>
+
+      </Swiper>
+
+
+
+
+
+      {/* <Stack direction={'row'} sx={{overflowX: 'scroll', overflowY: 'hidden'}} margin={'2rem 0'} spacing={2} >
         {clothesList.map((clothes) => {
           if(type === 'ALL' || type === clothes.large) {
             return <ClothesCard 
@@ -97,7 +152,7 @@ const Closet = ({selectTool}) => {
             return null
           }
         })}
-      </Stack>
+      </Stack> */}
     </React.Fragment>
 
   )
@@ -122,12 +177,14 @@ const ClothesCard = ({clothesData, selectTool, handleDelete}) => {
 
 
   return (
-    <Box onClick={handleSelect}>
-      <Box sx={{
+      <Box 
+        onClick={handleSelect}
+        sx={{
           position: 'relative',
           width: '20rem',
           height: '30rem',
           borderRadius: '0.75rem',
+          boxSizing: 'border-box',
           border: (selectTool && selectTool.clothIds.indexOf(clothesData.clothId) !== -1) ? `0.5rem solid ${theme.palette.secondary.main}` : 'none',
           padding: (selectTool && selectTool.clothIds.indexOf(clothesData.clothId) !== -1) ? '0.5rem' : 0,
           transition: '0.3s',
@@ -148,7 +205,6 @@ const ClothesCard = ({clothesData, selectTool, handleDelete}) => {
           <DeleteIcon fontSize='large'></DeleteIcon>
         </IconButton>
       </Box>
-    </Box>
   )
 }
 

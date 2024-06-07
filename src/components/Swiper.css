@@ -1,0 +1,47 @@
+:root {
+  --primary: #F83967;
+}
+
+.swiper {
+  width: 100%;
+  padding: 5rem;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 25rem;
+  height: 30rem;
+  border-radius: 0.75rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.slider-controler {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center
+}
+
+.swiper-pagination {
+  position: relative;
+  width: 15rem;
+  bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+  filter: drop-shadow(0px 8px 24px rgba(18, 28, 53, 0.1));
+}
+
+.swiper-pagination .swiper-pagination-bullet-active {
+  background: var(--primary);
+}

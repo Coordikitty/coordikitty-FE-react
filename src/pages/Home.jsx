@@ -14,6 +14,7 @@ import tempImg from "../assets/temp.jpg"
 import styleInfo from '../utils/styleInfo'
 import ClosetModal from '../components/Closet/ClosetModal'
 import RequiredSignin from '../components/RequiredSignin'
+import Recommend from '../components/Recommend'
 
 
 const SITUATION = 'situation'
@@ -98,13 +99,7 @@ const Home = () => {
             </Select>
           </FormControl>
         </Stack>
-        <Stack direction={'row'} sx={{overflowX: 'scroll'}} marginTop={'2rem'} spacing={2} >
-          <RecomandClothesCard></RecomandClothesCard>
-          <RecomandClothesCard></RecomandClothesCard>
-          <RecomandClothesCard></RecomandClothesCard>
-          <RecomandClothesCard></RecomandClothesCard>
-          <RecomandClothesCard></RecomandClothesCard>
-        </Stack>
+        <Recommend clothList={[1,2,3]}></Recommend>
       </Box> : <RequiredSignin></RequiredSignin>}
     </React.Fragment>
   )
@@ -113,13 +108,13 @@ const Home = () => {
 const RecomandClothesCard = () => {
   return (
     <Box>
-      <Typography variant='h3' marginBottom={'1rem'}>Hello</Typography>
+      {/* <Typography variant='h3' marginBottom={'1rem'}>Hello</Typography> */}
       <Box sx={{
         width: '26rem',
         height: '26rem',
-        backgroundImage: `url(${tempImg})`,
-        backgroundSize: 'cover'
-      }}></Box>
+      }}>
+        <img src={tempImg} style={{width: '100%', height: '100%', objectFit: 'cover'}}></img>
+      </Box>
     </Box>
   )
 }
