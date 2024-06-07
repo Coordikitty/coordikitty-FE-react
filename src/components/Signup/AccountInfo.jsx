@@ -107,11 +107,7 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "이메일 형식에 맞지 않습니다.",
               },
-              validate: {
-                onChange : () => {
-                  setEmailDupCheck(false)
-                }
-              }
+              onChange: () => setEmailDupCheck(false)
             })} />
           <Button 
             color='black' variant='contained' 
@@ -131,11 +127,7 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
             {...register("nickname", {
               required: "닉네임을 입력해 주세요.",
               pattern: {},
-              validate: {
-                onChange : () => {
-                  setNicknameDupCheck(false)
-                }
-              }
+              onChange: () => setNicknameDupCheck(false)
             })} />
           <Button 
             color='black' variant='contained' 

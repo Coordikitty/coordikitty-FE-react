@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   Modal,
   Container,
@@ -34,6 +34,17 @@ const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
   const [imgFile, setImgFile] = useState(null)
   const [preview, setPreview] = useState(null)
   const fileInputRef = useRef()
+
+  useEffect(() => {
+    setPreview(null)
+    setImgFile(null)
+    setTypeLv1('')
+    setTypeLv2('')
+    setTypeLv3('')
+    setFit('')
+    setThickness('')
+    setGender('')
+  }, [modalOpen])
 
   const handleLv1 = e => {
     setTypeLv3('')
@@ -80,6 +91,8 @@ const ClothesAppendModal = ({ modalOpen, handleModalClose }) => {
       alert('옷 정보 업로드 실패')
     }
   }
+
+  
 
   return (
     <Modal

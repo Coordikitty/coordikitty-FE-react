@@ -60,4 +60,4 @@ const PostWriteLeft = ({postImgs, setPostImgs}) => {
   )
 }
 
-export default PostWriteLeft
+export default React.memo(PostWriteLeft)
