@@ -47,7 +47,7 @@ const router = createHashRouter([
       },
       {
         path: "my-page",
-        element: <Guard><Mypage></Mypage></Guard>
+        element: <Mypage></Mypage>
       }
       // ------------------------------- 
     
