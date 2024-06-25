@@ -7,7 +7,8 @@ import {
   InputLabel,
   MenuItem,
   Typography,
-  Button
+  Button,
+  CircularProgress
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import tempImg from "../assets/temp.jpg"
@@ -15,11 +16,10 @@ import styleInfo from '../utils/styleInfo'
 import ClosetModal from '../components/Closet/ClosetModal'
 import RequiredSignin from '../components/RequiredSignin'
 import Recommend from '../components/Recommend'
+import recommendApi from '../apis/recommendApi'
 
-
-const SITUATION = 'situation'
-const STYLE = 'style'
-const SEASON = 'season'
+const SITUATION = 'SITUATEION'
+const STYLE = 'STYLE'
 
 const Home = () => {
 
@@ -29,31 +29,46 @@ const Home = () => {
   const accessToken = useSelector(state => state.user.accessToken)
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
+  const [rcdClothes, setRcdClothes] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const handleLv1 = e => {
     SetLv2('')
     SetLv1(e.target.value)
   } 
-  const handleLv2 = e => SetLv2(e.target.value) 
+  const handleLv2 = e => {
+    SetLv2(e.target.value) 
+    setLoading(true)
+  }
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      // Success
-      async(position) => {
-        const lat = position.coords.latitude
-        const lon = position.coords.longitude
-        console.log('lat', lat)
-        console.log('lon', lon)
-      },
-      // Fail
-      async(error) => {
-        const lat = 37.541
-        const lon = 126.986
-        console.log('lat', lat)
-        console.log('lon', lon)
-      },
-    )
-  }, [])
+    console.log(lv1, lv2)
+    if(lv1 && lv2)  {
+      navigator.geolocation.getCurrentPosition(
+        async(position) => {
+          const lat = position.coords.latitude
+          const lon = position.coords.longitude
+          try {
+            const res = await recommendApi(lv1, lv2, lat, lon)
+            console.log("recommendApi res : ", res)
+            console.log(Object.values(res[0]))
+            setRcdClothes(Object.values(res[0]))
+          } catch (e) {
+            console.error(e);
+            alert('옷 추천 실패')
+          } finally {
+            setLoading(false)
+          }
+        },
+        async(error) => {
+          const res = recommendApi(lv1, lv2, 37.541, 126.986)
+          console.log("recommendApi res : ", res)
+        },
+      )
+      
+    }
+    
+  }, [lv1, lv2])
 
   return (
     <React.Fragment>
@@ -77,11 +92,12 @@ const Home = () => {
               id="recomned-lv1-select" labelId="recomned-lv1-select-label"
               label="추천 유형"
               value={lv1}
+              disabled={loading}
               onChange={handleLv1}
             >
-              <MenuItem value={SITUATION}>상황</MenuItem>
+              {/*<MenuItem value={SITUATION}>상황</MenuItem>*/}
               <MenuItem value={STYLE}>스타일</MenuItem>
-              <MenuItem value={SEASON}>계절</MenuItem>
+              {/* <MenuItem value={SEASON}>계절</MenuItem> */}
             </Select>
           </FormControl>
           <FormControl fullWidth>
@@ -91,7 +107,7 @@ const Home = () => {
               label="세부 추천 유형"
               value={lv2}
               onChange={handleLv2}
-              disabled={!lv1}
+              disabled={!lv1 || loading}
             >
               {(lv1 === STYLE) && styleInfo.map((el) => {
                 return <MenuItem key={el.style} value={el.style}>{el.kr}</MenuItem>
@@ -99,7 +115,12 @@ const Home = () => {
             </Select>
           </FormControl>
         </Stack>
-        <Recommend clothList={[1,2,3]}></Recommend>
+        {loading ? 
+          <Box width={'100%'} padding={'15rem 0'} textAlign={'center'}>
+            <CircularProgress size={'10rem'} thickness={5} color='secondary'></CircularProgress>  
+          </Box> :
+          <Recommend rcdClothes={rcdClothes}></Recommend>
+        }
       </Box> : <RequiredSignin></RequiredSignin>}
     </React.Fragment>
   )
