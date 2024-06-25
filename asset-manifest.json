@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/coordikitty-FE-react/static/css/main.335911bc.css",
-    "main.js": "/coordikitty-FE-react/static/js/main.07ff75fb.js",
+    "main.js": "/coordikitty-FE-react/static/js/main.4ab3594f.js",
     "static/media/sporty.jpg": "/coordikitty-FE-react/static/media/sporty.c5df7ca45526bfea8e27.jpg",
     "static/media/RecTemp2.png": "/coordikitty-FE-react/static/media/RecTemp2.731fc8b59871ed6a0d17.png",
     "static/media/formal.jpg": "/coordikitty-FE-react/static/media/formal.ebe9bcd536c9a96367ed.jpg",
@@ -14,10 +14,10 @@
     "static/media/GoogleLogin.svg": "/coordikitty-FE-react/static/media/GoogleLogin.48a8be0745431c811da76da2de5c4c5c.svg",
     "index.html": "/coordikitty-FE-react/index.html",
     "main.335911bc.css.map": "/coordikitty-FE-react/static/css/main.335911bc.css.map",
-    "main.07ff75fb.js.map": "/coordikitty-FE-react/static/js/main.07ff75fb.js.map"
+    "main.4ab3594f.js.map": "/coordikitty-FE-react/static/js/main.4ab3594f.js.map"
   },
   "entrypoints": [
     "static/css/main.335911bc.css",
-    "static/js/main.07ff75fb.js"
+    "static/js/main.4ab3594f.js"
   ]
 }
