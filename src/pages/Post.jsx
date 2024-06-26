@@ -23,6 +23,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import seasonInfo from '../utils/seasonInfo';
 import styleInfo from '../utils/styleInfo';
 import deletePostApi from '../apis/post/deletePostApi';
+import {postLikeApi, postLikeCancelApi} from '../apis/post/postLikeApi';
 
 const Post = () => {
 
@@ -44,7 +45,15 @@ const Post = () => {
   }, [postId, navigate, email])
 
   const handleLike = async() => {
-    setPostData({...postData, isLiked: !postData.isLiked, postLike : postData.isLiked? postData.postLike - 1 : postData.postLike + 1})
+    if(postData.isLiked) {
+      setPostData({...postData, isLiked: false, postLike : postData.postLike - 1})
+      const res = await postLikeCancelApi(postId)
+      console.log("postLikeApi res : ", res)
+    } else {
+      setPostData({...postData, isLiked: true, postLike : postData.postLike + 1})
+      const res = await postLikeApi(postId)
+      console.log("postLikeApi res : ", res)
+    }
   }
 
   const handleBookmark = async() => {
@@ -62,6 +71,8 @@ const Post = () => {
       console.error(error);
     }
   }
+
+
 
   return (
     <Container maxWidth='sm' >

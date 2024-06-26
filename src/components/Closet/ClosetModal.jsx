@@ -14,7 +14,7 @@ const ClosetModal = ({ selectTool, modalOpen, handleModalClose }) => {
       onClose={handleModalClose}
       sx={{ display: 'flex', alignItems: "center" }}
     >
-      <Container maxWidth='md'>
+      <Container>
         <Box
           width={'100%'}
           padding={"4rem 2rem"}

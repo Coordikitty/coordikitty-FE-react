@@ -122,7 +122,7 @@ const SigninModal = ({ modalOpen, handleModalClose }) => {
           </Button>
 
           <Stack direction={'row'}>
-            <GoogleLogin onClick={handleGoogleLogin}></GoogleLogin>
+            {/* <GoogleLogin onClick={handleGoogleLogin}></GoogleLogin> */}
           </Stack>
 
         </Stack>
