@@ -1,5 +1,15 @@
 # Coordikitty - Web App
 
+## Getting Start
+1. `$git clone https://github.com/Coordikitty/coordikitty-FE-react.git` 혹은 zip 파일 다운
+2. 프로젝트로 위치 변경
+3. `$npm install`로 패키지 설치
+4. `$npm start`로 개발 서버 실행
+
+혹은 [http://ec2-43-202-147-62.ap-northeast-2.compute.amazonaws.com/](http://ec2-43-202-147-62.ap-northeast-2.compute.amazonaws.com/) 에서 확인 가능
+
+
+
 ## brach
 ```text
 master
