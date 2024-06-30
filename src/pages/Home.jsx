@@ -60,9 +60,18 @@ const Home = () => {
             setLoading(false)
           }
         },
-        async(error) => {
-          const res = recommendApi(lv1, lv2, 37.541, 126.986)
-          console.log("recommendApi res : ", res)
+        async() => {
+          try {
+            const res = await recommendApi(lv1, lv2, 37.541, 126.986)
+            console.log("recommendApi res : ", res)
+            console.log(Object.values(res[0]))
+            setRcdClothes(Object.values(res[0]))
+          } catch (e) {
+            console.error(e);
+            alert('옷 추천 실패')
+          } finally {
+            setLoading(false)
+          }
         },
       )
       
