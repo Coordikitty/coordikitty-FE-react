@@ -55,7 +55,7 @@ const Home = () => {
             setRcdClothes(Object.values(res[0]))
           } catch (e) {
             console.error(e);
-            alert('옷 추천 실패')
+            alert('해당 추천 유형에 적합한 옷이 없습니다. 옷을 추가 해 주세요!')
           } finally {
             setLoading(false)
           }
@@ -68,7 +68,7 @@ const Home = () => {
             setRcdClothes(Object.values(res[0]))
           } catch (e) {
             console.error(e);
-            alert('옷 추천 실패')
+            alert('해당 추천 유형에 적합한 옷이 없습니다. 옷을 추가 해 주세요!')
           } finally {
             setLoading(false)
           }
