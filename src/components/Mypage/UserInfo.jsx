@@ -4,34 +4,23 @@ import {
   Typography,
   Avatar,
   Stack,
-  Button
 } from '@mui/material'
 import PostList from '../Post/PostList'
-import {loggedGetPostListApi, unLoggedGetPostListApi} from '../../apis/post/getPostListApi';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import getPostListApi from '../../apis/post/getPostListApi';
+import PostListHeader from '../Post/PostListHeader';
 
 const UserInfo = () => {
 
-  const navigate = useNavigate()
   const [postList, setPostList] = useState([])
-  const accessToken = useSelector(state => state.user.accessToken)
 
 
   useEffect(() => {
-    const fetch = async() => {
-      if(accessToken) {
-        const res = await loggedGetPostListApi()
-        console.log('loggedGetPostListApi res : ', res)
-        setPostList(res)
-      } else {
-        const res = await unLoggedGetPostListApi()
-        console.log('unLoggedGetPostListApi res : ', res)
-        setPostList(res)
-      }
-    }
-    fetch()
-  }, [accessToken])
+    ;(async() => {
+      const res = await getPostListApi()
+      console.log('getPostListApi Res : ', res)
+      setPostList(res)
+    })()
+  }, [])
 
   return (
     <Box width={'100%'}>
@@ -47,17 +36,16 @@ const UserInfo = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-        <Typography variant='h1'>Post</Typography>
-        <Button 
-          variant='contained' 
-          disableElevation 
-          sx={{width: "20%"}}
-          onClick={() => {navigate('/post-write')}}
-        >
-          글 작성
-        </Button>
-      </Stack>
+
+      {/* Posts Written By User */}
+
+      {/* Post List Header */}
+      <PostListHeader
+        title={'MY POST'}
+        isViewWrite={true}
+      ></PostListHeader>
+
+      {/* Post List */}
       <PostList postList={postList}></PostList>
     </Box>
   )
