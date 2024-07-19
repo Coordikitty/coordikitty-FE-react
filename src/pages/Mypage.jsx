@@ -8,6 +8,7 @@ import {
 import UserInfo from '../components/Mypage/UserInfo'
 import Closet from '../components/Closet/Closet'
 import Bookmark from '../components/Mypage/Bookmark'
+import Follower from '../components/Mypage/Follower'
 
 const HOME = "HOME"
 const CLOSET = 'CLOSET'
@@ -40,8 +41,8 @@ const Mypage = () => {
         <Tab label="HOME" value={HOME}></Tab>
         <Tab label="CLOSET" value={CLOSET}></Tab>
         <Tab label="BOOKMARK" value={BOOKMARK}></Tab>
-        <Tab label="FOLLOWER" value={FOLLOWER}></Tab>
         <Tab label="FOLLOWING" value={FOLLOWING}></Tab>
+        <Tab label="FOLLOWER" value={FOLLOWER}></Tab>
         <Tab label="ACCOUNT" value={ACCOUNT}></Tab>
       </Tabs>
 
@@ -50,6 +51,7 @@ const Mypage = () => {
         {tab === HOME && <UserInfo></UserInfo>}
         {tab === CLOSET && <Closet></Closet>}
         {tab == BOOKMARK && <Bookmark></Bookmark>}
+        {tab == FOLLOWER && <Follower></Follower>}
       </Box>
     </Stack>
 
