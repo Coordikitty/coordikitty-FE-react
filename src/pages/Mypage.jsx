@@ -5,10 +5,10 @@ import {
   Tabs,
   Stack,
 } from '@mui/material'
-import UserInfo from '../components/Mypage/UserInfo'
+import UserInfo from '../components/UserPage/UserInfo'
 import Closet from '../components/Closet/Closet'
-import Bookmark from '../components/Mypage/Bookmark'
-import Follower from '../components/Mypage/Follower'
+import Bookmark from '../components/UserPage/Bookmark'
+import Follower from '../components/UserPage/Follower'
 
 const HOME = "HOME"
 const CLOSET = 'CLOSET'
@@ -50,8 +50,8 @@ const Mypage = () => {
       <Box width={'calc(100% - 15rem)'} padding={'2rem'}>
         {tab === HOME && <UserInfo></UserInfo>}
         {tab === CLOSET && <Closet></Closet>}
-        {tab == BOOKMARK && <Bookmark></Bookmark>}
-        {tab == FOLLOWER && <Follower></Follower>}
+        {tab === BOOKMARK && <Bookmark></Bookmark>}
+        {tab === FOLLOWER && <Follower></Follower>}
       </Box>
     </Stack>
 
