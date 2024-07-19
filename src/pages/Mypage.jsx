@@ -9,7 +9,7 @@ import UserInfo from '../components/UserPage/UserInfo'
 import Closet from '../components/Closet/Closet'
 import Bookmark from '../components/UserPage/Bookmark'
 import Follower from '../components/UserPage/Follower'
-
+import Following from '../components/UserPage/Following'
 const HOME = "HOME"
 const CLOSET = 'CLOSET'
 const BOOKMARK = 'BOOKMARK'
@@ -51,6 +51,7 @@ const Mypage = () => {
         {tab === HOME && <UserInfo></UserInfo>}
         {tab === CLOSET && <Closet></Closet>}
         {tab === BOOKMARK && <Bookmark></Bookmark>}
+        {tab === FOLLOWING && <Following></Following>}
         {tab === FOLLOWER && <Follower></Follower>}
       </Box>
     </Stack>
