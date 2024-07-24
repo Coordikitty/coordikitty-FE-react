@@ -8,9 +8,15 @@ import {
 import { useEffect, useState } from 'react'
 import { useForm, Controller, } from 'react-hook-form'
 import signupDupCheck from '../../apis/auth/signupDupCheck'
-
+import { useSearchParams } from 'react-router-dom'
 
 const AccountInfo = ({ setNextVaild, parentSetValue }) => {
+
+  const [searchParams, ] = useSearchParams();
+
+  const email = searchParams.get('email')
+  const name = searchParams.get('name')
+
 
   const {
     register,
@@ -22,6 +28,8 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
   } = useForm({
     mode: 'onChange',
     defaultValues: {
+      email: email || null,
+      name: name || null,
       phoneNumber: ''
     }
   })
@@ -101,6 +109,7 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
           <TextField
             id="email" type='email' label="이메일"
             variant="standard" margin='dense' fullWidth
+            disabled={email}
             {...register("email", {
               required: "이메일을 입력해 주세요.",
               pattern: {
@@ -109,11 +118,11 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
               },
               onChange: () => setEmailDupCheck(false)
             })} />
-          <Button 
+          {!email && <Button 
             color='black' variant='contained' 
             margin='dense' disableElevation sx={{textWrap: 'nowrap'}}
             onClick={handleEmailDupcheck}
-          >중복 확인</Button>
+          >중복 확인</Button>}
         </Stack>
         {errors.email ? <Typography color={'error'}>{errors.email.message}</Typography>:
         !emailDupCheck && <Typography color={'error'}>이메일 중복확인이 필요합니다.</Typography>}
@@ -174,6 +183,7 @@ const AccountInfo = ({ setNextVaild, parentSetValue }) => {
         <TextField
           id="name" type='text' label="이름"
           variant="standard" margin='dense' fullWidth
+          disabled={name}
           {...register("name", {
             required: "이름을 입력해 주세요.",
             pattern: {},

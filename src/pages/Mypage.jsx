@@ -5,17 +5,17 @@ import {
   Tabs,
   Stack,
 } from '@mui/material'
-import UserInfo from '../components/Mypage/UserInfo'
+import UserInfo from '../components/UserPage/UserInfo'
 import Closet from '../components/Closet/Closet'
-
+import Bookmark from '../components/UserPage/Bookmark'
+import Follower from '../components/UserPage/Follower'
+import Following from '../components/UserPage/Following'
 const HOME = "HOME"
 const CLOSET = 'CLOSET'
 const BOOKMARK = 'BOOKMARK'
 const FOLLOWING = 'FOLLOWING'
 const FOLLOWER = 'FOLLOWER'
 const ACCOUNT = 'ACCOUNT'
-
-
 
 const Mypage = () => {
 
@@ -28,6 +28,7 @@ const Mypage = () => {
 
   return (
     <Stack direction={'row'} marginTop={'2rem'} justifyContent={'space-between'}>
+      {/* Left Tap */}
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -40,14 +41,18 @@ const Mypage = () => {
         <Tab label="HOME" value={HOME}></Tab>
         <Tab label="CLOSET" value={CLOSET}></Tab>
         <Tab label="BOOKMARK" value={BOOKMARK}></Tab>
-        <Tab label="FOLLOWER" value={FOLLOWER}></Tab>
         <Tab label="FOLLOWING" value={FOLLOWING}></Tab>
+        <Tab label="FOLLOWER" value={FOLLOWER}></Tab>
         <Tab label="ACCOUNT" value={ACCOUNT}></Tab>
       </Tabs>
+
+      {/* Right Body */}
       <Box width={'calc(100% - 15rem)'} padding={'2rem'}>
         {tab === HOME && <UserInfo></UserInfo>}
         {tab === CLOSET && <Closet></Closet>}
-
+        {tab === BOOKMARK && <Bookmark></Bookmark>}
+        {tab === FOLLOWING && <Following></Following>}
+        {tab === FOLLOWER && <Follower></Follower>}
       </Box>
     </Stack>
 
