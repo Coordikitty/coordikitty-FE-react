@@ -10,13 +10,12 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/system';
 import LogoWide from '../../assets/LogoWide.png'
-import { ReactComponent as GoogleLogin} from '../../assets/GoogleLogin.svg'
 import { useForm } from 'react-hook-form'
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/UserReducer';
 import signinApi from '../../apis/auth/signinApi';
-import googleLoginApi from '../../apis/auth/googleLoginApi';
+import GoogleLoginButton from './GoogleLoginButton';
 
 const SigninModal = ({ modalOpen, handleModalClose }) => {
 
@@ -43,16 +42,6 @@ const SigninModal = ({ modalOpen, handleModalClose }) => {
     } catch (error) {
       console.error(error)
       alert('로그인 실패')
-    }
-  }
-
-  const handleGoogleLogin = async() => {
-    try {
-      const res = await googleLoginApi()
-      console.log('google Login res : ', res)
-    } catch (error) {
-      console.error(error)
-      alert('구글 로그인 실패')
     }
   }
 
@@ -122,7 +111,9 @@ const SigninModal = ({ modalOpen, handleModalClose }) => {
           </Button>
 
           <Stack direction={'row'}>
-            {/* <GoogleLogin onClick={handleGoogleLogin}></GoogleLogin> */}
+            <GoogleLoginButton
+              handleModalClose={handleModalClose}
+            ></GoogleLoginButton>
           </Stack>
 
         </Stack>
