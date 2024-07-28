@@ -8,7 +8,6 @@ import {
 } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/UserReducer'
-import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
 const HeaderProfile = () => {
@@ -16,13 +15,13 @@ const HeaderProfile = () => {
   const nickname = useSelector(state => state.user.nickname)
   const dispatch = useDispatch()
   const [, , removeCookie] = useCookies()
-  const navigate = useNavigate()
 
   const handleLogout = () => {
     dispatch(logout())
     removeCookie('refreshToken')
+    sessionStorage.removeItem('accessToken')
     alert('로그아웃 되었습니다')
-    navigate('/')
+    window.location.replace('/')
   }
 
   return (

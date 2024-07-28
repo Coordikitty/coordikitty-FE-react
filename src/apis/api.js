@@ -1,7 +1,5 @@
 import axios from "axios";
 import { Cookies } from "react-cookie";
-import store from "../store";
-import { refreshAccessToken } from "../redux/UserReducer";
 // cookie 내용 가져오기
 const cookies = new Cookies()
 
@@ -13,7 +11,7 @@ const api = axios.create({
 // request에 대한 전처리
 api.interceptors.request.use(
   (config) => {
-    const token = store.getState().user.accessToken
+    const token = sessionStorage.getItem('accessToken')
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`
     } else {
@@ -43,10 +41,9 @@ api.interceptors.response.use(
           })
           const newAccessToken = res.data.tokenDto.accessToken
           const newRefreshToken = res.data.tokenDto.refreshToken
-          store.dispatch(refreshAccessToken(newAccessToken));
+          sessionStorage.setItem('accessToken', newAccessToken)
           cookies.set('refreshToken', newRefreshToken)
           api.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`
-          console.log("eooeoeeo")
           return await api(originRequest);
         } catch (error) {
           throw error
