@@ -8,8 +8,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const GoogleLoginButton = ({handleModalClose}) => {
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
-  console.log(clientId)
   
   const dispatch = useDispatch()
   const [, setCookie] = useCookies()
