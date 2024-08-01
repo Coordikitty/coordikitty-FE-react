@@ -43,7 +43,7 @@ const GoogleLoginButton = ({handleModalClose}) => {
               setCookie('refreshToken', res.tokenDto.refreshToken)
               handleModalClose()
             } catch(error) {
-              if(error.response.status == 401) {
+              if(error.response.status === 401) {
                 alert('회원가입이 필요한 소셜 계정입니다')
                 navigate(`/sign-up?email=${email}&name=${name}`)
                 handleModalClose()
