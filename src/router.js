@@ -1,12 +1,12 @@
 import { createBrowserRouter, createHashRouter, Navigate } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
-import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import PostWrite from "./pages/PostWrite";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import Guard from "./pages/Guard";
+import PostPage from "./pages/PostPage";
 
 const router = createHashRouter([
   {
@@ -23,7 +23,7 @@ const router = createHashRouter([
       // Post --------------------------
       {// Posts page
         path: "posts",
-        element: <Posts></Posts>
+        element: <PostPage></PostPage>
       },
       {// Post page
         path: "post/:postId",
