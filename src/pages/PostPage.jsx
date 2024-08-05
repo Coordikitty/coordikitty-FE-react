@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Box, Tab, Tabs } from '@mui/material'
 import PostListHeader from '../components/Post/PostListHeader'
 import PostList from '../components/Post/PostList'
-
+import getPostListApi from '../apis/post/getPostListApi'
 
 const imgs = [
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ux6b26C7E5tu4xKPTtRD9k6BIWWocpRlYw&s',
@@ -53,8 +53,8 @@ const PostPage = () => {
         </Tabs>
       </Box>
 
-      {tap === 0 && <PostList getDataApi={getPostList}></PostList>}
-      {tap === 1 && <PostList></PostList>}
+      {tap === 0 && <PostList type={'type1'} getPostListApi={getPostListApi}></PostList>}
+      {tap === 1 && <PostList type={'type2'} getPostListApi={getPostList}></PostList>}
 
     </Box>
   )

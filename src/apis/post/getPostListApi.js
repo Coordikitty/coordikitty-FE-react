@@ -1,8 +1,8 @@
 import api from "../api";
 
 
-const getPostListApi = () => {
-  console.log('getPostListApi Call')
+const getPostListApi = (page) => {
+  console.log('getPostListApi Call', page)
   const res = api.get('/post')
   return res
 }
