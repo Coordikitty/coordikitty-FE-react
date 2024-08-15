@@ -14,7 +14,6 @@ const PostCard = ({ imgSrc, postId, isLoading }) => {
   return (
     <Fade in={!isLoading} timeout={250} appear={true}>
       <Box onClick={() => { navigate(`/post/${postId}`) }}>
-        <div>{postId}</div>
         {imgSrc ? <img
           src={imgSrc}
           alt={imgSrc}
