@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import {
-  Box,
   Avatar,
   Typography,
   Stack,
-  Button,
   Menu,
   MenuItem,
   IconButton,
@@ -13,17 +11,14 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../redux/UserReducer'
-import { useCookies } from 'react-cookie'
 
 const HeaderProfile = () => {
   
   const theme = useTheme()
   const navigate = useNavigate()
 
-  // const nickname = useSelector(state => state.user.nickname)
-  const nickname = 'Test'
+  const nickname = useSelector(state => state.user.nickname)
   const dispatch = useDispatch()
-  const [, , removeCookie] = useCookies()
 
   // Menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,7 +28,6 @@ const HeaderProfile = () => {
 
   const handleLogout = () => {
     dispatch(logout())
-    removeCookie('refreshToken')
     sessionStorage.removeItem('accessToken')
     alert('로그아웃 되었습니다')
     window.location.replace('/')
@@ -69,7 +63,7 @@ const HeaderProfile = () => {
       >
         {/* User info */}
         <Stack spacing={1} textAlign={'end'}>
-          <Typography variant='h3'>User</Typography>
+          <Typography variant='h3'>{nickname}</Typography>
           <Stack direction={'row'} spacing={2} justifyContent={'space-between'} textAlign={'center'}>
             <Typography variant='body2'>게시물 : {1}</Typography>
             <Typography variant='body2'>팔로워 : {1}</Typography>
