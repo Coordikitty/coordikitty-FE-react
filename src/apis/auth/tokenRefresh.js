@@ -1,8 +1,10 @@
 import api from "../api";
 
 const tokenRefreshApi = (data) => {
-  console.log('tokenRefreshApi Call : ', data)
-  const res = api.post('/auth/token', data)
+  console.log('tokenRefreshApi Call : ')
+  const res = api.post('/auth/token', {}, {
+
+  })
   return res
 }
 
