@@ -1,38 +1,34 @@
-import React, { useState } from 'react'
-import { 
-  Stack,
-  TextField,
-  Button,
-  Box
-} from '@mui/material'
-import { styled } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
-import HeaderProfile from './HeaderProfile';
-import LogoWide from '../../assets/LogoWide.png'
-import HeaderAuth from './HeaderAuth';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { Stack, TextField, Button, Box } from "@mui/material";
+import { styled } from "@mui/system";
+import { useLocation, useNavigate } from "react-router-dom";
+import HeaderProfile from "./HeaderProfile";
+import LogoWide from "../../assets/LogoWide.png";
+import HeaderAuth from "./HeaderAuth";
+import { useSelector } from "react-redux";
 
-const HOME = 'home'
-const POST = 'post'
-const MY_PAGE = 'my_page'
+const HOME = "HOME";
+const POST = "POST";
 
 const Header = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const tap = location.pathname === "/" ? HOME : POST;
+  const nickname = useSelector((state) => state.user.nickname);
 
-  const [tap, setTap] = useState(HOME)
-  const navigate = useNavigate()
-  const nickname = useSelector(state => state.user.nickname)
-  
   return (
-    <Stack component={"header"} spacing={0}
+    <Stack
+      component={"header"}
+      spacing={0}
       sx={{
-        position: 'sticky',
-        marginTop: '2rem',
+        position: "sticky",
+        marginTop: "2rem",
         backgroundColor: "#ffffff",
         borderRadius: "0.75rem",
         overflow: "hidden",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-      }}>
-
+      }}
+    >
       {/* Top */}
       <Stack direction={"row"} alignItems={"center"} spacing={0}>
         {/* Logo */}
@@ -41,82 +37,85 @@ const Header = () => {
         </NavTopItemWrap>
         {/* Search */}
         <NavTopItemWrap>
-          <TextField 
-            id="search" 
-            label="Search" 
+          <TextField
+            id="search"
+            label="Search"
             variant="outlined"
             fullWidth
-            size='small'
+            size="small"
             sx={{
-              "& fieldset" :{
-                borderRadius: "0.75rem"
-              }
+              "& fieldset": {
+                borderRadius: "0.75rem",
+              },
             }}
           />
         </NavTopItemWrap>
         {/* Profile */}
         <NavTopItemWrap>
-          { nickname ? <HeaderProfile />:<HeaderAuth />}  
+          {nickname ? <HeaderProfile /> : <HeaderAuth />}
         </NavTopItemWrap>
       </Stack>
 
       {/* Bottom */}
       <Stack component={"nav"} direction={"row"}>
-        <NavButton variant='contained' fullWidth 
-          is-active={tap === HOME ? 'true' : undefined} 
-          onClick={() => {setTap(HOME); navigate('/')}}
+        <NavButton
+          variant="contained"
+          is-active={tap === HOME ? "true" : undefined}
+          onClick={() => {
+            navigate("/");
+          }}
         >
           Home
         </NavButton>
-        <NavButton variant='contained' fullWidth 
-          is-active={tap === POST ? 'true' : undefined}
-          onClick={() => {setTap(POST); navigate('/posts')}}
+        <NavButton
+          variant="contained"
+          is-active={tap === POST ? "true" : undefined}
+          onClick={() => {
+            navigate("/posts");
+          }}
         >
           Post
         </NavButton>
-        <NavButton variant='contained' fullWidth 
-          is-active={tap === MY_PAGE ? 'true' : undefined}
-          onClick={() => {setTap(MY_PAGE); navigate('/my-page')}}
-        >
-          My Page
-        </NavButton>
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
 const NavTopItemWrap = styled(Box)(() => {
   return {
     padding: "0.5rem 1rem",
-    width: "100%"
-  }
-})
+    width: "100%",
+  };
+});
 
-const Logo = styled('div')(() => {
+const Logo = styled("div")(() => {
   return {
     height: "5rem",
     width: "11rem",
     backgroundImage: `url(${LogoWide})`,
     backgroundSize: "contain",
-    backgroundRepeat: "no-repeat"
-  }
-})
+    backgroundRepeat: "no-repeat",
+  };
+});
 
 const NavButton = styled(Button)((props) => {
   return {
     borderRadius: 0,
     boxShadow: "none",
     fontSize: "1.6rem",
+    width: "45%",
+    transition: "ease-in-out 0.5s",
     ...(props["is-active"] && {
+      width: "55%",
       fontWeight: 700,
       backgroundColor: "#ffffff",
       boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px",
-      "&:hover" : {
+      "&:hover": {
         backgroundColor: "#ffffff",
-        boxShadow: "none"
-      }
-    })
-  }
-})
+        boxShadow: "none",
+      },
+    }),
+  };
+});
 
-export default Header
+export default Header;
