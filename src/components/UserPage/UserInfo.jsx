@@ -46,7 +46,7 @@ const UserInfo = () => {
       ></PostListHeader>
 
       {/* Post List */}
-      <PostList postList={postList}></PostList>
+      {/* <PostList postList={postList}></PostList> */}
     </Box>
   )
 }

@@ -10,7 +10,6 @@ import {
 } from '@mui/material'
 import LogoWide from '../../assets/LogoWide.png'
 import { useForm } from 'react-hook-form'
-import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/UserReducer';
 import signinApi from '../../apis/auth/signinApi';
@@ -19,7 +18,6 @@ import GoogleLoginButton from './GoogleLoginButton';
 const SigninModal = ({ modalOpen, handleModalClose }) => {
 
   const dispatch = useDispatch()
-  const [, setCookie] = useCookies()
   const {
     register,
     handleSubmit,
@@ -34,10 +32,9 @@ const SigninModal = ({ modalOpen, handleModalClose }) => {
         email: res.email,
         nickname: res.nickname,
       }))
-      sessionStorage.setItem('accessToken', res.tokenDto.accessToken)
-      setCookie('refreshToken', res.tokenDto.refreshToken)
+      sessionStorage.setItem('accessToken', res.accessToken)
       handleModalClose()
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error(error)
       alert('로그인 실패')

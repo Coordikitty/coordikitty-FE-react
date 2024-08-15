@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 const Guard = ({children}) => {
 
-  const accessToken = useSelector(state => state.user.accessToken)
-
-  if (accessToken) {
+  const nickname = useSelector(state => state.user.nickname)
+  if (nickname) {
     return (children)
   } else {
     alert('로그인 후 이용하세요')

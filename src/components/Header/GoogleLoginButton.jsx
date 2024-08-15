@@ -8,8 +8,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const GoogleLoginButton = ({handleModalClose}) => {
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
-  console.log(clientId)
   
   const dispatch = useDispatch()
   const [, setCookie] = useCookies()
@@ -45,7 +43,7 @@ const GoogleLoginButton = ({handleModalClose}) => {
               setCookie('refreshToken', res.tokenDto.refreshToken)
               handleModalClose()
             } catch(error) {
-              if(error.response.status == 401) {
+              if(error.response.status === 401) {
                 alert('회원가입이 필요한 소셜 계정입니다')
                 navigate(`/sign-up?email=${email}&name=${name}`)
                 handleModalClose()
