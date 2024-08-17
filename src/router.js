@@ -11,6 +11,7 @@ import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import Guard from "./pages/Guard";
 import PostPage from "./pages/PostPage";
+import UserPage from "./pages/UserPage";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,6 @@ const router = createBrowserRouter([
         path: "post/:postId",
         element: <Post></Post>,
       },
-      // postId가 없는 경우에 대한 리다이렉트 설정
       {
         path: "post/",
         element: <Navigate to="/posts" replace />,
@@ -61,6 +61,14 @@ const router = createBrowserRouter([
         element: <Mypage></Mypage>,
       },
       // -------------------------------
+      {
+        path: "user-page/:userEmail",
+        element: <UserPage></UserPage>,
+      },
+      {
+        path: "user-page",
+        element: <Navigate to="/my-page" replace />,
+      },
     ],
   },
 ]);
