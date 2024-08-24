@@ -6,18 +6,12 @@
 3. `$npm install`로 패키지 설치
 4. `$npm start`로 개발 서버 실행
 
-혹은 [http://ec2-43-202-147-62.ap-northeast-2.compute.amazonaws.com/](http://ec2-43-202-147-62.ap-northeast-2.compute.amazonaws.com/) 에서 확인 가능
-
-
-
 ## brach
 ```text
 master
 └─ develop : 개발이 이루어지는 brach
   └─ feature/[SCURUM] : SCRUM 단위 개발
 ```
-
-
 
 ## Commit Convention
 - 커밋 형식
