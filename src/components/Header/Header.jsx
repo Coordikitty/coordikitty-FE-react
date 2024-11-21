@@ -7,13 +7,9 @@ import LogoWide from "../../assets/LogoWide.png";
 import HeaderAuth from "./HeaderAuth";
 import { useSelector } from "react-redux";
 
-const HOME = "HOME";
-const POST = "POST";
-
 const Header = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const tap = location.pathname === "/" ? HOME : POST;
   const nickname = useSelector((state) => state.user.nickname);
 
   return (
@@ -35,21 +31,6 @@ const Header = () => {
         <NavTopItemWrap>
           <Logo></Logo>
         </NavTopItemWrap>
-        {/* Search */}
-        <NavTopItemWrap>
-          <TextField
-            id="search"
-            label="Search"
-            variant="outlined"
-            fullWidth
-            size="small"
-            sx={{
-              "& fieldset": {
-                borderRadius: "0.75rem",
-              },
-            }}
-          />
-        </NavTopItemWrap>
         {/* Profile */}
         <NavTopItemWrap>
           {nickname ? <HeaderProfile /> : <HeaderAuth />}
@@ -60,7 +41,7 @@ const Header = () => {
       <Stack component={"nav"} direction={"row"}>
         <NavButton
           variant="contained"
-          is-active={tap === HOME ? "true" : undefined}
+          is-active={pathname === "/" ? "true" : undefined}
           onClick={() => {
             navigate("/");
           }}
@@ -69,7 +50,7 @@ const Header = () => {
         </NavButton>
         <NavButton
           variant="contained"
-          is-active={tap === POST ? "true" : undefined}
+          is-active={pathname === "/posts" ? "true" : undefined}
           onClick={() => {
             navigate("/posts");
           }}
@@ -103,10 +84,10 @@ const NavButton = styled(Button)((props) => {
     borderRadius: 0,
     boxShadow: "none",
     fontSize: "1.6rem",
-    width: "45%",
+    width: "50%",
     transition: "ease-in-out 0.5s",
     ...(props["is-active"] && {
-      width: "55%",
+      width: "70%",
       fontWeight: 700,
       backgroundColor: "#ffffff",
       boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px",

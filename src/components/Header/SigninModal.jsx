@@ -34,6 +34,8 @@ const SigninModal = ({ modalOpen, handleModalClose }) => {
         })
       );
       sessionStorage.setItem("accessToken", res.accessToken);
+      sessionStorage.setItem("nickname", res.nickname);
+      sessionStorage.setItem("email", res.email);
       handleModalClose();
       // window.location.reload()
     } catch (error) {

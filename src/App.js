@@ -1,39 +1,34 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header/Header";
 import { Container } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/UserReducer";
-import tokenRefreshApi from "./apis/auth/tokenRefresh";
 function App() {
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const accessToken = sessionStorage.getItem('accessToken')
-  const dispatch = useDispatch()
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    const email = sessionStorage.getItem("email");
+    const nickname = sessionStorage.getItem("nickname");
 
-  useEffect(()=> {
-    // FIXME!!! : 사용자의 프로필 정보를 받아오는 API로 변경해야 함
-    if(accessToken) {
-      ;(async() => {
-        try {
-          const res = await tokenRefreshApi()
-          console.log("tokenRefreshApi res : ", res)
-          dispatch(login({
-            email : res.email,
-            nickname : res.nickname,
-          }))
-          sessionStorage.setItem('accessToken', res.accessToken)
-        } catch (error) {
-          console.error(error)
-        }
-      })()
+    if (accessToken && email && nickname) {
+      dispatch(
+        login({
+          email,
+          nickname,
+        })
+      );
     }
-  }, [accessToken, dispatch])
+    setIsLoading(false);
+  }, [dispatch]);
 
   return (
-      <Container maxWidth="md" >
-        <Header></Header>
-        <Outlet></Outlet>
-      </Container>
+    <Container maxWidth="md">
+      <Header></Header>
+      {!isLoading && <Outlet></Outlet>}
+    </Container>
   );
 }
 

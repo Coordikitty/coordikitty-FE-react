@@ -3,15 +3,11 @@ import { Box, Typography, Avatar, Stack } from "@mui/material";
 import PostList from "../Post/PostList";
 import getPostListApi from "../../apis/post/getPostListApi";
 import PostListHeader from "../Post/PostListHeader";
+import { useSelector } from "react-redux";
+import getMyPostApi from "../../apis/post/getMyPostApi";
 
-const UserInfo = ({ userEmail }) => {
-  // TODO : 사용자 이메일을 주면 닉네임, 기타 정보를 받아오는 통신 코드 추가
-  const userInfo = useState({
-    nickName: "Test",
-    numOfPost: "1",
-    numOfFollower: "1",
-    numOfFollowing: "1",
-  });
+const UserInfo = () => {
+  const nickname = useSelector((state) => state.user.nickname);
 
   return (
     <Box width={"100%"}>
@@ -24,20 +20,7 @@ const UserInfo = ({ userEmail }) => {
         margin={"5rem auto"}
       >
         <Avatar sx={{ width: "10rem", height: "10rem" }}></Avatar>
-        <Stack spacing={2}>
-          <Typography variant="h2">{userInfo.nickName}</Typography>
-          <Stack direction={"row"} spacing={2}>
-            <Typography variant="body1">
-              게시물 : {userInfo.numOfPost}
-            </Typography>
-            <Typography variant="body1">
-              팔로워 : {userInfo.numOfFollower}
-            </Typography>
-            <Typography variant="body1">
-              팔로잉 : {userInfo.numOfFollowing}
-            </Typography>
-          </Stack>
-        </Stack>
+        <Typography variant="h2">{nickname}</Typography>
       </Stack>
 
       {/* Posts Written By User */}
@@ -46,7 +29,7 @@ const UserInfo = ({ userEmail }) => {
       <PostListHeader title={"MY POST"} isViewWrite={true}></PostListHeader>
 
       {/* Post List */}
-      <PostList getPostListApi={getPostListApi}></PostList>
+      <PostList getPostListApi={getMyPostApi}></PostList>
     </Box>
   );
 };

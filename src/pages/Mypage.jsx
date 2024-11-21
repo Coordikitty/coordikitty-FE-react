@@ -41,9 +41,6 @@ const Mypage = () => {
         <Tab label="HOME" value={HOME}></Tab>
         <Tab label="CLOSET" value={CLOSET}></Tab>
         <Tab label="BOOKMARK" value={BOOKMARK}></Tab>
-        <Tab label="FOLLOWING" value={FOLLOWING}></Tab>
-        <Tab label="FOLLOWER" value={FOLLOWER}></Tab>
-        <Tab label="ACCOUNT" value={ACCOUNT}></Tab>
       </Tabs>
 
       {/* Right Body */}
@@ -51,8 +48,6 @@ const Mypage = () => {
         {tab === HOME && <UserInfo userEmail={userEmail}></UserInfo>}
         {tab === CLOSET && <Closet></Closet>}
         {tab === BOOKMARK && <Bookmark></Bookmark>}
-        {tab === FOLLOWING && <Following></Following>}
-        {tab === FOLLOWER && <Follower></Follower>}
       </Box>
     </Stack>
   );
