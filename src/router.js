@@ -13,7 +13,7 @@ import Guard from "./pages/Guard";
 import PostPage from "./pages/PostPage";
 import UserPage from "./pages/UserPage";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App></App>,
