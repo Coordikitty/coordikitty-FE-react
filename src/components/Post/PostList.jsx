@@ -16,7 +16,14 @@ const PostList = ({ getPostListApi }) => {
       try {
         setIsLoading(true);
         const res = await getPostListApi();
-        setPostList(res);
+        setPostList(
+          res.sort((a, b) => {
+            return (
+              new Date(b.uploadDate).getTime() -
+              new Date(a.uploadDate).getTime()
+            );
+          })
+        );
       } catch (e) {
         setIsError(true);
       } finally {
